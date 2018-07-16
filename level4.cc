@@ -37,6 +37,7 @@ shared_ptr<AbstractBlock> Level4::createBlock(){
     else if(n == 8){
       return make_shared{TBlock}();
     }
+    seqPos++;
   }
   else{
     if(seqPos != (blockSeq.size()-1)){

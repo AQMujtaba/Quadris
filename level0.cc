@@ -40,6 +40,7 @@ shared_ptr<AbstractBlock> Level0::createBlock(){
     else{
       
     }
+    seqPos++;
   }
   else{
     restartSeq();

@@ -37,6 +37,7 @@ shared_ptr<AbstractBlock> Level1::createBlock(){
     else if(n == 10 || n == 11){
       return make_shared{TBlock}();
     }
+    seqPos++;
   }
   else{
     if(seqPos != (blockSeq.size()-1)){

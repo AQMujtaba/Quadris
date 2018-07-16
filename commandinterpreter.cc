@@ -1,4 +1,4 @@
-#include "commandInterpreter.h"
+#include "commandinterpreter.h"
 #include <vector>
 
 using namespace std;
@@ -16,7 +16,7 @@ string CommandInterpreter::interpretCommand(string command){
     command = substr(numberLen, command.srtlen() - numberLen);
   }
   
-  vector<string> possibleCommands = {"left", "right", "down", "clockwise", "counterclockwise", "drop", "levelup", "leveldown", "norandom", "random", "sequence", "I", "J", "L", "restart", "hint"}
+  vector<string> possibleCommands = {"left", "right", "down", "clockwise", "counterclockwise", "drop", "levelup", "leveldown", "norandom", "random", "sequence", "I", "J", "L", "restart", "hint"};
   
   for (std::vector<string>::iterator i = possibleCommands.begin(); i != possibleCommands.end(); i++) {
     if((*i).find(command) != 0){
@@ -24,7 +24,7 @@ string CommandInterpreter::interpretCommand(string command){
     }
   }
   
-  if(possibleCommands.size == 1){
+  if(possibleCommands.size() == 1){
     return ((string)multiplier + possibleCommands[0]);
   }
   return "noCommand";

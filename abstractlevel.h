@@ -3,6 +3,7 @@
 
 #include <string>
 #include <memory>
+#include <vector>
 
 class AbstractBlock;
 
@@ -11,6 +12,7 @@ class AbstractLevel {
   bool random;
   std::string seqFile;
   std::vector<char> blockSeq;
+ protected:
   int seqPos;
  public:
   AbstractLevel(, bool random, std::string seqFile, int seed = 1);
