@@ -2,19 +2,28 @@
 #define _grid_
 
 #include <memory>
+#include <vector>
 #include "abstractblock"
 
+class Cell;
+class GraphicsDisplay;
+class TextDisplay;
+
 class Grid{
+  std::vector<std::vector<Cell>> theGrid;
+  shared_ptr<TextDisplay> td;
+  shared_ptr<GraphicsDisplay> gd;
  public:
   Grid();
+  void hint();
   void reset();
-  void left(AbstractBlock block);
-  void right(AbstractBlock block);
-  void down(AbstractBlock block);
-  void drop(AbstractBlock block);
-  void clockwise(AbstractBlock block);
-  void counterClockwise(AbstractBlock block);
-  void newBlock(AbstractBlock block);
+  void left(std::shared_ptr<AbstractBlock> block);
+  void right(std::shared_ptr<AbstractBlock> block);
+  void down(std::shared_ptr<AbstractBlock> block);
+  void drop(std::shared_ptr<AbstractBlock> block);
+  void clockwise(std::shared_ptr<AbstractBlock> block);
+  void counterClockwise(std::shared_ptr<AbstractBlock> block);
+  void newBlock(std::shared_ptr<AbstractBlock> block);
 }
 
 #endif
