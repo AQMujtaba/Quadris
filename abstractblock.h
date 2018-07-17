@@ -27,8 +27,6 @@ protected:
   int getWidth() const;
   int& setHeight();
   int& setWidth();
-<<<<<<< HEAD
-<<<<<<< HEAD
   bool isHeavy() const; // true for levels 3+
 };
 
