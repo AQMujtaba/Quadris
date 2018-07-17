@@ -28,7 +28,11 @@ protected:
   int& setHeight();
   int& setWidth();
 <<<<<<< HEAD
+<<<<<<< HEAD
   bool isHeavy() const;
+=======
+  virtual bool isHeavy() const = 0; // true for levels 3+
+>>>>>>> 75284bd4aa3cf508000b836f3091786f50062fe9
 =======
   virtual bool isHeavy() const = 0; // true for levels 3+
 >>>>>>> 75284bd4aa3cf508000b836f3091786f50062fe9
