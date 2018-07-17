@@ -1,7 +1,7 @@
 #ifndef _observer_
 #define _observer_
 
-class Subject;
+#include "subject.h"
 
 class Observer {
   virtual void notify(Subject &whoFrom) = 0;
