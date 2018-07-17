@@ -27,7 +27,7 @@ protected:
   int getWidth() const;
   int& setHeight();
   int& setWidth();
-  virtual bool isHeavy() const = 0;
+  virtual bool isHeavy() const = 0; // true for levels 3+
 };
 
 #endif
