@@ -37,4 +37,6 @@ int& AbstractBlock::setHeight() {
 int& AbstractBlock::setWidth() {
 	return width;
 }
-	
+bool AbstractBlock::isHeavy() const {
+	return (level->getLevel() >= 3);
+}
