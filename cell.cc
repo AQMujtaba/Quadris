@@ -37,9 +37,6 @@ bool Cell::canAddBlock(shared_ptr<AbstractBlock> newBlock) const{
   return false;
 }
 
-void Cell::clearCell(bool withScore); {
-  if(withScore){
-    //Figure out how to add to scoreboard
-  }
+void Cell::clearCell(); {
   block = nullptr;
 }

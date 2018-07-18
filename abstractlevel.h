@@ -19,6 +19,7 @@ class AbstractLevel {
   ~AbstractLevel();
   bool isRandom();
   void restartSeq();
+  void setSeqFile(std::string newFile);
   virtual void setRandom(bool r) = 0;
   virtual int getLevel() = 0;
   virtual std::shared_pointer<AbstractBlock> createBlock() = 0;

@@ -12,6 +12,17 @@ AbstractLevel::AbstractLevel(bool random, string seqFile, int seed):  seed{seed}
   }
 }
 
+void AbstractLevel::setSeqFile(string newFile){
+  seqFile = newFile;
+  ifstream ifs;
+  ifs.open(seqFile);
+  char block;
+  blockSeq.clear();
+  while(ifs >> skipws >> block){
+    blockSeq.push_back(block);
+  }
+}
+
 AbstractLevel::~AbstractLevel(){}
 
 bool AbstractLevel::isRandom(){
