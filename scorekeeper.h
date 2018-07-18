@@ -9,6 +9,7 @@ class ScoreKeeper{
   int getScore() const;
   int getHighScore() const;
   void addScore(int amount);
+  void resetScore();
 }
 
 #endif
