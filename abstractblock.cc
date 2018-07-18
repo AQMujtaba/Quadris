@@ -7,7 +7,7 @@ using namespace std;
 
 AbstractBlock::AbstractBlock(int level, int col, int row):
 	level{ level }, col{ col }, row{ row } {
-	orientation = 1;
+	orientation = 0;
 } 
 
 int AbstractBlock::getOrientation() const {
