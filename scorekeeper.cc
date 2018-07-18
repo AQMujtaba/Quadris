@@ -16,3 +16,7 @@ void addScore(int amount) {
     highScore = score;
   }
 }
+
+void resetScore() {
+  score = 0;
+}
