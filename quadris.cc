@@ -1,5 +1,113 @@
 #include "quadris.h"
 
+using namespace std;
+
+void Quadris::setLevel(int level){
+  if(level <= 0){
+    currentLevel = make_shared<level0>(seqFile, seed);
+  }
+  else if(level == 1){
+    currentLevel = make_shared<level1>(seqFile, seed);
+  }
+  else if(level == 2){
+    currentLevel = make_shared<level2>(seqFile, seed);
+  }
+  else if(level == 3){
+    currentLevel = make_shared<level3>(seqFile, seed);
+  }
+  else{
+    currentLevel = make_shared<level0>(seqFile, seed);
+  }
+}
+
+Quadris::Quadris(bool textOnly, int seed, std::string seqFile, int startLevel): textOnly{textOnly},
+seed{seed}, seqFile{seqFile}, scoreKeeper{make_unique<ScoreKeeper>()},
+commandInterpreter{make_unique<CommandInterpreter>()}, theGrid{make_unique<Grid>()}{
+  if(startLevel == 0){
+    currentLevel = make_shared<level0>(seqFile, seed);
+  }
+  else if(startLevel == 1){
+    currentLevel = make_shared<level1>(seqFile, seed);
+  }
+  else if(startLevel == 2){
+    currentLevel = make_shared<level2>(seqFile, seed);
+  }
+  else if(startLevel == 3){
+    currentLevel = make_shared<level3>(seqFile, seed);
+  }
+  else{
+    currentLevel = make_shared<level0>(seqFile, seed);
+  }
+  theGrid->setLevel(currentLevel->getLevel());
+}
+
 void Quadris::Start(){
+  string aCommand;
   
+  (while cin >> aCommand){
+    int multiplier;
+    aCommand = commandInterpreter->interpretCommand(aCommand, multiplier);
+    
+    if(aCommand == "left"){
+      theGrid->left(currentBlock, multiplier);
+    }
+    else if(aCommand == "right"){
+      theGrid->right(currentBlock multiplier);
+    }
+    else if(aCommand == "down"){
+      theGrid->down(currentBlock, multiplier);
+    }
+    else if(aCommand == "clockwise"){
+      theGrid->clockwise(currentBlock, multiplier);
+    }
+    else if(aCommand == "counterclockwise"){
+      theGrid->counterClockwise(currentBlock, multiplier);
+    }
+    else if(aCommand == "drop"){
+      for(int i = 0; i < multiplier; i++){
+        theGrid->drop(currentBlock);
+        currentBlock = currentLevel->createBlock();
+      }
+    }
+    else if(aCommand == "levelup"){
+      int curr = currentLevel->getLevel();
+      if(curr = 0){
+        
+      }
+      else if(curr = 1){
+        
+      }
+      theGrid->down(currentBlock, multiplier);
+    }
+    else if(aCommand == "leveldown"){
+      theGrid->down(currentBlock, multiplier);
+    }
+    else if(aCommand == "norandom"){
+      
+    }
+    else if(aCommand == "random"){
+      
+    }
+    else if(aCommand == "sequence"){
+      
+    }
+    else if(aCommand == "I"){
+      
+    }
+    else if(aCommand == "J"){
+      
+    }
+    else if(aCommand == "L"){
+      
+    }
+    else if(aCommand == "restart"){
+      
+    }
+    else if(aCommand == "hint"){
+      
+    }
+    else if(aCommand == noCommand){
+      
+    }
+  }
 }
