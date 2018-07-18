@@ -8,8 +8,11 @@
 
 class SBlock : public AbstractBlock {
 public:
-SBlock(std::shared_ptr<AbstractLevel> level, std::shared_ptr<Cell> axis,
-	   char type = 'S', int orientation = 1);
+	SBlock(int level, int col, int row);
+	char getShape() const override;
+	Coordinates get2ndCell() override;
+	Coordinates get3rdCell() override;
+	Coordinates get4thCell() override;
 };
 
 #endif

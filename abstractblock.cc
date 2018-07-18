@@ -5,38 +5,36 @@
 
 using namespace std;
 
-AbstractBlock::AbstractBlock(shared_ptr<AbstractLevel> level,
-	shared_ptr<Cell> axis, char type, int orientation) :
-	level{ level }, referenceCell{ axis }, shape{ type },
-	orientation{ orientation } {}
+AbstractBlock::AbstractBlock(int level, int col, int row):
+	level{ level }, col{ col }, row{ row } {
+	orientation = 1;
+} 
 
 int AbstractBlock::getOrientation() const {
 	return orientation;
 }
-int& AbstractBlock::setOrientation() {
-	return orientation;
+void AbstractBlock::setOrientation(int newOrientation) {
+	orientation = newOrientation;
 }
-shared_ptr<AbstractLevel> AbstractBlock::getLevel() {
+int AbstractBlock::getLevel() {
 	return level;
 }
-shared_ptr<Cell> AbstractBlock::getAxis() {
-	return referenceCell;
+int AbstractBlock::getRow() const {
+	return row;
 }
-char AbstractBlock::getShape() const {
-	return shape;
+int AbstractBlock::getCol() const {
+	return col;
 }
-int AbstractBlock::getHeight() const {
-	return height;
+void AbstractBlock::setRow(int newRow) {
+	row = newRow;
 }
-int AbstractBlock::getWidth() const {
-	return width;
-}
-int& AbstractBlock::setHeight() {
-	return height;
-}
-int& AbstractBlock::setWidth() {
-	return width;
+void AbstractBlock::setCol(int newCol) {
+	col = newCol;
 }
 bool AbstractBlock::isHeavy() const {
-	return (level->getLevel() >= 3);
+	return (level >= 3);
+}
+Coordinates AbstractBlock::getReference() const {
+	Coordinates cell{ col, row };
+	return cell;
 }

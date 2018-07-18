@@ -5,9 +5,30 @@
 
 using namespace std;
 
-TBlock::TBlock(shared_ptr<AbstractLevel> level, shared_ptr<Cell> axis,
-			   char type = 'T', int orientation = 1) :
-	AbstractBlock{ level, axis, type, orientation } {
-	height = 3; 
-	width = 2; 
+TBlock::TBlock(int level, int col, int row) :
+	AbstractBlock{ level, col, row } {}
+
+char TBlock::getShape() const {
+	return 'T';
+}
+
+Coordinates TBlock::get2ndCell() {
+	int col = getCol();
+	int row = getRow();
+	Coordinates cell{ col + 1, row + 1 };
+	return cell;
+}
+
+Coordinates TBlock::get3rdCell() {
+	int col = getCol();
+	int row = getRow();
+	Coordinates cell{ col, row + 1 };
+	return cell;
+}
+
+Coordinates TBlock::get4thCell() {
+	int col = getCol();
+	int row = getRow();
+	Coordinates cell{ col - 1, row + 1 };
+	return cell;
 }

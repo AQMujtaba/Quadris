@@ -3,31 +3,28 @@
 
 #include <memory>
 #include "abstractlevel"
+#include "coordinates.h"
 
 class AbstractBlock{
-  std::shared_ptr<AbstractLevel> level;
-  //std::vector<std::shared_ptr<Cell>> cells; 
-  std::shared_ptr<Cell> referenceCell; // lower left cell needed for rotation
-  char shape;
+  int level; 
+  int col, row; // lower left cell needed for rotation
   int orientation; // 1 = N, 2 = E, 3 = S, 4 = W
-				   // caller's responsibility to cycle from 4 to 1 or 1 to 4
-protected:
-  int height, width;
-  bool placed; // whether or not the block is inactive and placed on grid
-  
+				           // caller's responsibility to cycle from 4 to 1 or 1 to 4
  public:
-  AbstractBlock(std::shared_ptr<AbstractLevel> level,
-		 std::shared_ptr<Cell> axis, char type, int orientation);
+  AbstractBlock(int level, int col, int row, int orientation);
   int getOrientation() const;
-  int& setOrientation();
-  std::shared_ptr<AbstractLevel> getLevel();
-  std::shared_ptr<Cell> getAxis();
-  char getShape() const;
-  int getHeight() const;
-  int getWidth() const;
-  int& setHeight();
-  int& setWidth();
+  void setOrientation(int newOrientation);
+  int getLevel();
+  int getRow() const;
+  int getCol() const;
+  void setRow(int newRow);
+  void setCol(int newCol);
   bool isHeavy() const; // true for levels 3+
+  virtual char getShape() const = 0;
+  Coordinates getReference() const;
+  virtual Coordinates get2ndCell() = 0;
+  virtual Coordinates get3rdCell() = 0;
+  virtual Coordinates get4thCell() = 0;
 };
 
 #endif

@@ -5,9 +5,30 @@
 
 using namespace std;
 
-JBlock::JBlock(shared_ptr<AbstractLevel> level, shared_ptr<Cell> axis,
-			   char type = 'J', int orientation = 1) :
-	AbstractBlock{ level, axis, type, orientation } {
-	height = 2;
-	width = 3;
+JBlock::JBlock(int level, int col, int row) :
+	AbstractBlock{ level, col, row } {}
+
+char JBlock::getShape() const {
+	return 'J';
+}
+
+Coordinates JBlock::get2ndCell() {
+	int col = getCol();
+	int row = getRow();
+	Coordinates cell{ col + 1, row };
+	return cell;
+}
+
+Coordinates JBlock::get3rdCell() {
+	int col = getCol();
+	int row = getRow();
+	Coordinates cell{ col + 2, row };
+	return cell;
+}
+
+Coordinates JBlock::get4thCell() {
+	int col = getCol();
+	int row = getRow();
+	Coordinates cell{ col, row + 1 };
+	return cell;
 }

@@ -8,8 +8,11 @@
 
 class ZBlock : public AbstractBlock {
 public:
-ZBlock(std::shared_ptr<AbstractLevel> level, std::shared_ptr<Cell> axis,
-	   char type = 'Z', int orientation = 1);
+	ZBlock(int level, int col, int row);
+	char getShape() const override;
+	Coordinates get2ndCell() override;
+	Coordinates get3rdCell() override;
+	Coordinates get4thCell() override;
 };
 
 #endif

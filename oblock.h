@@ -8,8 +8,12 @@
 
 class OBlock : public AbstractBlock {
 public:
-OBlock(std::shared_ptr<AbstractLevel> level, std::shared_ptr<Cell> axis,
-	   char type = 'O', int orientation = 1);
+	OBlock(int level, int col, int row);
+	char getShape() const override;
+	Coordinates get2ndCell() override;
+	Coordinates get3rdCell() override;
+	Coordinates get4thCell() override;
 };
+
 
 #endif
