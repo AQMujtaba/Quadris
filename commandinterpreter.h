@@ -7,7 +7,7 @@
 
 class CommandInterpreter {
  public:
-  std::string interpretCommand(std::string s);
+  std::string interpretCommand(std::string s, int &multiplier);
 }
 
 #endif

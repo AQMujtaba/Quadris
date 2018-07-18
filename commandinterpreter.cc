@@ -4,7 +4,7 @@
 using namespace std;
 
 string CommandInterpreter::interpretCommand(string command){
-  int multiplier = 1;
+  multiplier = 1;
   // If there is a command multiplier at the start store it in multiplier
   // and remove it from the start of command.
   if(command[0] >= '0' && command[0] <= '9'){
@@ -25,7 +25,7 @@ string CommandInterpreter::interpretCommand(string command){
   }
   
   if(possibleCommands.size() == 1){
-    return ((string)multiplier + possibleCommands[0]);
+    return possibleCommands[0];
   }
   return "noCommand";
 }
