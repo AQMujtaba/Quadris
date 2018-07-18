@@ -2,7 +2,10 @@
 #include "textdisplay.h"
 #include "graphicsdisplay.h"
 
-Grid::Grid(): td{make_ptr<TextDisplay>()}, gd{make_ptr<GraphicsDisplay>()}{
+using namespace std;
+
+Grid::Grid(shared_ptr<AbstractLevel> currentLevel): td{make_ptr<TextDisplay>()}, gd{make_ptr<GraphicsDisplay>()},
+currentLevel{currentLevel}{
   for(int rowIndex = 0; rowIndex < 11; rowIndex++){
     vector<Cell> rowVec;
     for(int colIndex = 0; colIndex < 17; colIndex++){
@@ -26,15 +29,17 @@ void Grid::reset(){
   }
 }
 
-void Grid::left(std::shared_ptr<AbstractBlock> block){
+void Grid::left(std::shared_ptr<AbstractBlock> block, int multiplicity){
+  for(int i = 0; i < multiplicity; i++){
+    
+  }
+}
+
+void Grid::right(std::shared_ptr<AbstractBlock> block, int multiplicity){
   
 }
 
-void Grid::right(std::shared_ptr<AbstractBlock> block){
-  
-}
-
-void Grid::down(std::shared_ptr<AbstractBlock> block){
+void Grid::down(std::shared_ptr<AbstractBlock> block, int multiplicity){
   
 }
 
@@ -42,15 +47,21 @@ void Grid::drop(std::shared_ptr<AbstractBlock> block){
   
 }
 
-void Grid::clockwise(std::shared_ptr<AbstractBlock> block){
+void Grid::clockwise(std::shared_ptr<AbstractBlock> block, int multiplicity){
   
 }
 
-void Grid::counterClockwise(std::shared_ptr<AbstractBlock> block){
+void Grid::counterClockwise(std::shared_ptr<AbstractBlock> block, int multiplicity){
   
 }
 
 void Grid::newBlock(std::shared_ptr<AbstractBlock> block){
   
+}
+
+void Grid::setLevel(int newLevel){
+  currentLevel = newLevel;
+  td->setLevel(currentLevel);
+  gd->setLevel(currentLevel);
 }
 
