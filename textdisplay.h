@@ -8,6 +8,8 @@
 #include "scoreKeeper.h"
 
 class TextDisplay: public Observer {
+  const int gridHeight = 18;
+  const int gridWidth = 11;
   int currentLevel;
   std::shared_ptr<ScoreKeeper> scoreKeeper;
   std::vector<std::vector<char>> theDisplay;
