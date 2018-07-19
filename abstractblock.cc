@@ -2,12 +2,13 @@
 #include "abstractblock.h"
 #include "cell.h"
 #include "abstractlevel.h"
+#include "scorekeeper.h"
 
 using namespace std;
 
 AbstractBlock::AbstractBlock(int level, int col, int row,
-	std::shared_ptr<ScoreKeeper> score, int height):
-	level{ level }, col{ col }, row{ row }, score{ score }, height{ height } {
+	shared_ptr<ScoreKeeper> score):
+	level{ level }, score{ score }, col{ col }, row{ row } {
 	orientation = 0;
 	placed = true;
 }

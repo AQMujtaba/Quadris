@@ -1,4 +1,5 @@
 #include "textdisplay.h"
+#include "info.h"
 
 using namespace std;
 
@@ -7,7 +8,12 @@ theDisplay{vector<vector<char>>(18, vector<char>(11, ' '))}, currentLevel{curren
 ScoreKeeper{scoreKeeper}{}
 
 void TextDisplay::notify(Subject &whoNotified){
-  theDisplay[whoNotified.getRow()][whoNotified.getCol()] = whoNotified.getBlock().getShape();
+  Info myInfo = whoNotified.getInfo();
+  theDisplay[myInfo.row][myInfo.col] = whoNotified.blockType;
+}
+
+void TextDisplay::setLevel(int newLevel){
+  currentLevel = newLevel;
 }
 
 ostream &operater<<ostream &out, const TextDisplay &td){

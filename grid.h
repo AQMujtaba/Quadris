@@ -3,9 +3,10 @@
 
 #include <memory>
 #include <vector>
-#include "abstractblock"
+#include "abstractblock.h"
+#include "scorekeeper.h"
+#include "cell.h"
 
-class Cell;
 class GraphicsDisplay;
 class TextDisplay;
 
@@ -36,7 +37,7 @@ class Grid{
   
   //Places a new block. Returns a false if unsuccessful.
   bool newBlock(std::shared_ptr<AbstractBlock> block);
-  void setLevel(std::shared_ptr<AbstractLevel> newLevel);
+  void setLevel(int newLevel);
   void replaceBlock(std::shared_ptr<AbstractBlock> currBlock,
                     std::shared_ptr<AbstractBlock> newBlock);
 };

@@ -22,7 +22,7 @@ void Quadris::setLevel(int level){
 
 Quadris::Quadris(bool textOnly, int seed, std::string seqFile, int startLevel): textOnly{textOnly},
 seed{seed}, seqFile{seqFile}, scoreKeeper{make_unique<ScoreKeeper>()},
-commandInterpreter{make_unique<CommandInterpreter>()}, theGrid{make_unique<Grid>()}{
+myInterpreter{make_unique<CommandInterpreter>()}, theGrid{make_unique<Grid>()}{
   setLevel(startLevel);
   theGrid->setLevel(currentLevel->getLevel());
   // haven't initialized/defined currentBlock anywhere
@@ -33,7 +33,7 @@ void Quadris::Start(){
   
   (while cin >> aCommand){
     int multiplier;
-    aCommand = commandInterpreter->interpretCommand(aCommand, multiplier);
+    aCommand = myInterpreter->interpretCommand(aCommand, multiplier);
     
     if(aCommand == "left"){
       theGrid->left(currentBlock, multiplier);

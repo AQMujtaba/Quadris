@@ -6,8 +6,8 @@
 using namespace std;
 
 OBlock::OBlock(int level, int col, int row,
-std::shared_ptr<ScoreKeeper> score, int height = 2) :
-	AbstractBlock{ level, col, row, score, height } {}
+std::shared_ptr<ScoreKeeper> score) :
+	AbstractBlock{ level, col, row, score } {}
 
 char OBlock::getShape() const {
 	return 'O';
@@ -101,17 +101,17 @@ Coordinates OBlock::get4thCell(int newOrientation) {
 	}
 }
 Coordinates OBlock::get1stCell() {
-	return get1stCell(orientation);
+	return get1stCell(getOrientation());
 }
 
 Coordinates OBlock::get2ndCell() {
-	return get2ndCell(orientation);
+	return get2ndCell(getOrientation());
 }
 
 Coordinates OBlock::get3rdCell() {
-	return get3rdCell(orientation);
+	return get3rdCell(getOrientation());
 }
 
 Coordinates OBlock::get4thCell() {
-	return get4thCell(orientation);
+	return get4thCell(getOrientation());
 }

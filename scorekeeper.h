@@ -5,11 +5,11 @@ class ScoreKeeper{
   int score;
   int highScore;
  public:
-  ScoreKeeper(score = 0, highScore = 0);
+  ScoreKeeper(int score = 0, int highScore = 0);
   int getScore() const;
   int getHighScore() const;
   void addScore(int amount);
   void resetScore();
-}
+};
 
 #endif

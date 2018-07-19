@@ -2,6 +2,7 @@
 #define _subject_
 
 #include <vector>
+#include "info.h"
 
 class Observer;
 
@@ -11,5 +12,7 @@ class Subject {
   void attach(std::shared_ptr<Observer> observer);
   void detach(std::shared_ptr<Observer> observer);
   void notifyObsevers();
-  virtual getInfo() const = 0;
-}
+  virtual Info getInfo() const = 0;
+};
+
+#endif

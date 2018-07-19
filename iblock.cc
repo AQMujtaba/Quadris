@@ -6,8 +6,8 @@
 using namespace std;
 
 IBlock::IBlock(int level, int col, int row,
-std::shared_ptr<ScoreKeeper> score, int height = 1) :
-	AbstractBlock{ level, col, row, score, height } {}
+std::shared_ptr<ScoreKeeper> score) :
+	AbstractBlock{ level, col, row, score } {}
 
 char IBlock::getShape() const {
 	return 'I';
@@ -102,20 +102,20 @@ Coordinates IBlock::get4thCell(int newOrientation) {
 	}
 }
 Coordinates IBlock::get1stCell() {
-	return get1stCell(orientation);
+	return get1stCell(getOrientation());
 }
 
 Coordinates IBlock::get2ndCell() {
-	return get2ndCell(orientation);
+	return get2ndCell(getOrientation());
 }
 
 
 Coordinates IBlock::get3rdCell() {
-	return get3rdCell(orientation);
+	return get3rdCell(getOrientation());
 }
 
 
 Coordinates IBlock::get4thCell() {
-	return get4thCell(orientation);
+	return get4thCell(getOrientation());
 }
 

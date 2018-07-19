@@ -6,8 +6,8 @@
 using namespace std;
 
 ZBlock::ZBlock(int level, int col, int row,
-std::shared_ptr<ScoreKeeper> score, int height = 2) :
-	AbstractBlock{ level, col, row, score, height } {}
+std::shared_ptr<ScoreKeeper> score) :
+	AbstractBlock{ level, col, row, score } {}
 
 char ZBlock::getShape() const {
 	return 'Z';
@@ -101,17 +101,17 @@ Coordinates ZBlock::get4thCell(int newOrientation) {
 	}
 }
 Coordinates ZBlock::get1stCell() {
-	return get1stCell(orientation);
+	return get1stCell(getOrientation());
 }
 
 Coordinates ZBlock::get2ndCell() {
-	return get2ndCell(orientation);
+	return get2ndCell(getOrientation());
 }
 
 Coordinates ZBlock::get3rdCell() {
-	return get3rdCell(orientation);
+	return get3rdCell(getOrientation());
 }
 
 Coordinates ZBlock::get4thCell() {
-	return get4thCell(orientation);
+	return get4thCell(getOrientation());
 }

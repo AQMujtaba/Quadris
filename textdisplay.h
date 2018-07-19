@@ -5,7 +5,7 @@
 #include <vector>
 #include <memory>
 #include "observer.h"
-#include "scoreKeeper.h"
+#include "scorekeeper.h"
 
 class TextDisplay: public Observer {
   const int gridHeight = 18;
@@ -16,6 +16,7 @@ class TextDisplay: public Observer {
  public:
   TextDisplay(int currentLevel, std::shared_ptr<ScoreKeeper> scoreKeeper);
   void notify(Subject &whoNotified) override;
+  void setLevel(int newLevel);
   friend std::ostream &operator<<(std::ostream &out, const TextDisplay &td);
 };
 

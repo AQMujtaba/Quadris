@@ -9,7 +9,7 @@
 class LBlock : public AbstractBlock {
 public:
 	LBlock(int level, int col, int row,
-		std::shared_ptr<ScoreKeeper> score, int height = 2);
+		std::shared_ptr<ScoreKeeper> score);
 	char getShape() const override;
 	Coordinates get1stCell() override;
 	Coordinates get2ndCell() override;

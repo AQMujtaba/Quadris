@@ -6,8 +6,8 @@
 using namespace std;
 
 TBlock::TBlock(int level, int col, int row,
-std::shared_ptr<ScoreKeeper> score, int height = 2) :
-	AbstractBlock{ level, col, row, score, height } {}
+std::shared_ptr<ScoreKeeper> score) :
+	AbstractBlock{ level, col, row, score } {}
 
 char TBlock::getShape() const {
 	return 'T';
@@ -101,17 +101,17 @@ Coordinates TBlock::get4thCell(int newOrientation) {
 	}
 }
 Coordinates TBlock::get1stCell() {
-	return get1stCell(orientation);
+	return get1stCell(getOrientation());
 }
 
 Coordinates TBlock::get2ndCell() {
-	return get2ndCell(orientation);
+	return get2ndCell(getOrientation());
 }
 
 Coordinates TBlock::get3rdCell() {
-	return get3rdCell(orientation);
+	return get3rdCell(getOrientation());
 }
 
 Coordinates TBlock::get4thCell() {
-	return get4thCell(orientation);
+	return get4thCell(getOrientation());
 }

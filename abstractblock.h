@@ -2,14 +2,13 @@
 #define _abstractblock_
 
 #include <memory>
-#include "abstractlevel"
+#include "abstractlevel.h"
 #include "coordinates.h"
 
 class ScoreKeeper;
 
 class AbstractBlock{
   int level; 
-  int height; // height at initial orientation
   std::shared_ptr<ScoreKeeper> score;
   bool placed;
   int col, row; // lower left cell needed for rotation
@@ -17,7 +16,7 @@ class AbstractBlock{
 				           // caller's responsibility to cycle from 3 to 0 or 0 to 3
  public:
   AbstractBlock(int level, int col, int row, 
-    std::shared_ptr<ScoreKeeper> score, int height);
+    std::shared_ptr<ScoreKeeper> score);
   ~AbstractBlock();
   int getOrientation() const;
   void setOrientation(int newOrientation);

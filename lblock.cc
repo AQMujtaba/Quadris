@@ -6,8 +6,8 @@
 using namespace std;
 
 LBlock::LBlock(int level, int col, int row,
-std::shared_ptr<ScoreKeeper> score, int height = 2) :
-	AbstractBlock{ level, col, row, score, height } {}
+std::shared_ptr<ScoreKeeper> score) :
+	AbstractBlock{ level, col, row, score } {}
 
 char LBlock::getShape() const {
 	return 'L';
@@ -101,17 +101,17 @@ Coordinates LBlock::get4thCell(int newOrientation) {
 	}
 }
 Coordinates LBlock::get1stCell() {
-	return get1stCell(orientation);
+	return get1stCell(getOrientation());
 }
 
 Coordinates LBlock::get2ndCell() {
-	return get2ndCell(orientation);
+	return get2ndCell(getOrientation());
 }
 
 Coordinates LBlock::get3rdCell() {
-	return get3rdCell(orientation);
+	return get3rdCell(getOrientation());
 }
 
 Coordinates LBlock::get4thCell() {
-	return get4thCell(orientation);
+	return get4thCell(getOrientation());
 }

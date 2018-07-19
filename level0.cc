@@ -13,6 +13,7 @@ using namespace std;
 Level0::Level0(std::string seqFile): AbstractLevel{false, seqFile}{}
 
 void Level0::setRandom(bool r){
+  (void)r;
   random = false;
 }
 
@@ -23,34 +24,36 @@ int Level0::getLevel(){
 shared_ptr<AbstractBlock> Level0::createBlock(){
   if(seqPos != (blockSeq.size()-1)){
     char block = blockSeq[seqPos];
+    shared_ptr<AbstractBlock> returnBlock;
     if(block == 'I'){
-      return make_shared{IBlock}();
+      returnBlock = make_shared{IBlock}(0,0,0,nullptr);
     }
     else if(block == 'J'){
-      return make_shared{JBlock}();
+      returnBlock = make_shared{JBlock}(0,0,0,nullptr);
     }
     else if(block == 'L'){
-      return make_shared{LBlock}();
+      returnBlock = make_shared{LBlock}(0,0,0,nullptr);
     }
     else if(block == 'O'){
-      return make_shared{OBlock}();
+      returnBlock = make_shared{OBlock}(0,0,0,nullptr);
     }
     else if(block == 'S'){
-      return make_shared{SBlock}();
+      returnBlock = make_shared{SBlock}(0,0,0,nullptr);
     }
     else if(block == 'T'){
-      return make_shared{TBlock}();
+      returnBlock = make_shared{TBlock}(0,0,0,nullptr);
     }
     else if(block == 'Z'){
-      return make_shared{ZBlock}();
+      returnBlock = make_shared{ZBlock}(0,0,0,nullptr);
     }
     else{
       
     }
+    return returnBlock;
     seqPos++;
   }
   else{
-    restartSeq();
+    seqPos = 0;
     return createBlock();
   }
   return nullptr;

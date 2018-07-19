@@ -3,7 +3,7 @@
 
 using namespace std;
 
-string CommandInterpreter::interpretCommand(string command){
+string CommandInterpreter::interpretCommand(string command, int &multiplier){
   multiplier = 1;
   // If there is a command multiplier at the start store it in multiplier
   // and remove it from the start of command.
@@ -13,7 +13,7 @@ string CommandInterpreter::interpretCommand(string command){
       numberLen++;
     }
     multiplier = stoi(command.substr(0,numberLen));
-    command = substr(numberLen, command.srtlen() - numberLen);
+    command = command.substr(numberLen, command.length() - numberLen);
   }
   
   vector<string> possibleCommands = {"left", "right", "down", "clockwise", "counterclockwise", "drop", "levelup", "leveldown", "norandom", "random", "sequence", "I", "J", "L", "restart", "hint"};

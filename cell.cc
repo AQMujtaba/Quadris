@@ -18,7 +18,7 @@ shared_ptr<AbstractBlock> Cell::getBlock() const{
   return block;
 }
 void Cell::setBlock(shared_ptr<AbstractBlock> newBlock){
-  if(canAddBlock){
+  if(canAddBlock(newBlock)){
     block = newBlock;
   }
 }
@@ -37,6 +37,19 @@ bool Cell::canAddBlock(shared_ptr<AbstractBlock> newBlock) const{
   return false;
 }
 
-void Cell::clearCell(); {
+void Cell::clearCell() {
   block = nullptr;
+}
+
+Info Cell::getInfo() const {
+  Info myInfo;
+  myInfo.col = col;
+  myInfo.row = row;
+  if(block){
+    myInfo.blockType = block->getShape();
+  }
+  else{
+    myInfo.blockType = ' ';
+  }
+  return myInfo;
 }

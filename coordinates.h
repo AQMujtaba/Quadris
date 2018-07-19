@@ -4,6 +4,6 @@
 struct Coordinates {
 	int col;
 	int row;
-}
+};
 
 #endif

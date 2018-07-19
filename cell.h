@@ -1,8 +1,10 @@
 #ifndef _cell_
 #define _cell_
 
+#include "subject.h"
+#include "info.h"
+
 class Observer;
-class Subject;
 class AbstractBlock;
 
 class Cell: public Subject {
@@ -17,6 +19,7 @@ class Cell: public Subject {
   bool isEmpty() const;
   bool canAddBlock(std::shared_ptr<AbstractBlock> newBlock) const;
   void clearCell();
+  Info getInfo() const override;
 };
 
 #endif
