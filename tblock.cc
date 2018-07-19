@@ -5,8 +5,9 @@
 
 using namespace std;
 
-TBlock::TBlock(int level, int col, int row, int height = 2) :
-	AbstractBlock{ level, col, row, height } {}
+TBlock::TBlock(int level, int col, int row,
+std::shared_ptr<ScoreKeeper> score, int height = 2) :
+	AbstractBlock{ level, col, row, score, height } {}
 
 char TBlock::getShape() const {
 	return 'T';

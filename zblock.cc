@@ -5,8 +5,9 @@
 
 using namespace std;
 
-ZBlock::ZBlock(int level, int col, int row, int height = 2) :
-	AbstractBlock{ level, col, row, height } {}
+ZBlock::ZBlock(int level, int col, int row,
+std::shared_ptr<ScoreKeeper> score, int height = 2) :
+	AbstractBlock{ level, col, row, score, height } {}
 
 char ZBlock::getShape() const {
 	return 'Z';

@@ -8,7 +8,8 @@
 
 class OBlock : public AbstractBlock {
 public:
-	OBlock(int level, int col, int row, int height = 2);
+	OBlock(int level, int col, int row,
+		std::shared_ptr<ScoreKeeper> score, int height = 2);
 	char getShape() const override;
 	Coordinates get1stCell() override;
 	Coordinates get2ndCell() override;

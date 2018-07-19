@@ -5,8 +5,9 @@
 
 using namespace std;
 
-IBlock::IBlock(int level, int col, int row, int height = 1) :
-	AbstractBlock{ level, col, row, height } {}
+IBlock::IBlock(int level, int col, int row,
+std::shared_ptr<ScoreKeeper> score, int height = 1) :
+	AbstractBlock{ level, col, row, score, height } {}
 
 char IBlock::getShape() const {
 	return 'I';

@@ -5,9 +5,18 @@
 
 using namespace std;
 
-AbstractBlock::AbstractBlock(int level, int col, int row):
-	level{ level }, col{ col }, row{ row }, height{ height } {
+AbstractBlock::AbstractBlock(int level, int col, int row,
+	std::shared_ptr<ScoreKeeper> score, int height):
+	level{ level }, col{ col }, row{ row }, score{ score }, height{ height } {
 	orientation = 0;
+	placed = true;
+}
+
+AbstractBlock::~AbstractBlock() {
+	if (placed) {
+		int points = ((level + 1) * (level + 1));
+		score->addScore(points);
+	}
 } 
 
 int AbstractBlock::getOrientation() const {
@@ -17,6 +26,11 @@ void AbstractBlock::setOrientation(int newOrientation) {
 	orientation = ((newOrientation % 4 + 4) % 4); // math equivalent to 
 												  // newOrientation % 4
 }
+
+void AbstractBlock::togglePlaced() {
+	placed = false;
+}
+
 int AbstractBlock::getLevel() {
 	return level;
 }

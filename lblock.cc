@@ -5,8 +5,9 @@
 
 using namespace std;
 
-LBlock::LBlock(int level, int col, int row, int height = 2) :
-	AbstractBlock{ level, col, row, height } {}
+LBlock::LBlock(int level, int col, int row,
+std::shared_ptr<ScoreKeeper> score, int height = 2) :
+	AbstractBlock{ level, col, row, score, height } {}
 
 char LBlock::getShape() const {
 	return 'L';

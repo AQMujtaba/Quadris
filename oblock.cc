@@ -5,8 +5,9 @@
 
 using namespace std;
 
-OBlock::OBlock(int level, int col, int row, int height = 2) :
-	AbstractBlock{ level, col, row, height } {}
+OBlock::OBlock(int level, int col, int row,
+std::shared_ptr<ScoreKeeper> score, int height = 2) :
+	AbstractBlock{ level, col, row, score, height } {}
 
 char OBlock::getShape() const {
 	return 'O';
