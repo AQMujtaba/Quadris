@@ -2,10 +2,12 @@
 
 using namespace std;
 
-TextDisplay::TextDisplay(): theDisplay{vector<vector<char>>(18, vector<char>(11, ' '))}{}
+TextDisplay::TextDisplay(int currentLevel, std::shared_ptr<ScoreKeeper> scoreKeeper):
+theDisplay{vector<vector<char>>(18, vector<char>(11, ' '))}, currentLevel{currentLevel},
+ScoreKeeper{scoreKeeper}{}
 
 void TextDisplay::notify(Subject &whoNotified){
-  theDisplay[whoNotified.getRow()][whoNotified.getCol()] = whoNotified.getBlock().getType();
+  theDisplay[whoNotified.getRow()][whoNotified.getCol()] = whoNotified.getBlock().getShape();
 }
 
 ostream &operater<<ostream &out, const TextDisplay &td){

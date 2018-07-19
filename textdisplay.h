@@ -14,7 +14,7 @@ class TextDisplay: public Observer {
   std::shared_ptr<ScoreKeeper> scoreKeeper;
   std::vector<std::vector<char>> theDisplay;
  public:
-  TextDisplay(std::shared_ptr<AbstractLevel> currentLevel);
+  TextDisplay(int currentLevel, std::shared_ptr<ScoreKeeper> scoreKeeper);
   void notify(Subject &whoNotified) override;
   friend std::ostream &operator<<(std::ostream &out, const TextDisplay &td);
 };

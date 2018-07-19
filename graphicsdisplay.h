@@ -6,9 +6,16 @@
 #include "window.h"
 
 class GraphicsDisplay: public Observer{
+  const int gridHeight = 18;
+  const int gridWidth = 11;
+  const int dispHeight = 800;
+  csont int dispWidth = 500;
+  int currentLevel;
+  std::shared_ptr<ScoreKeeper> scoreKeeper;
+  
   Xwindow theDisplay;
  public:
-  GraphicsDisplay();
+  GraphicsDisplay(int currentLevel, std::shared_ptr<ScoreKeeper> scoreKeeper);
   
   void notify(Subject<Info, State> &whoNotified) override;
   
