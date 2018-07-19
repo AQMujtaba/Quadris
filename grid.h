@@ -13,6 +13,7 @@ class Grid{
   const int gridHeight = 18;
   const int gridWidth = 11;
   int currentLevel;
+  int blocksSinceClear;
   std::vector<std::vector<Cell>> theGrid;
   std::shared_ptr<TextDisplay> td;
   std::shared_ptr<GraphicsDisplay> gd;
@@ -21,8 +22,9 @@ class Grid{
   void checkRows();
   void clearRow(int row);
   void shiftRowsDown(int startRow);
+  void dropSingleBlock();
  public:
-  Grid(std::shared_ptr<AbstractLevel> currentLevel = nullptr);
+  Grid(int currentLevel, std::shared_ptr<ScoreKeeper> scoreKeeper);
   void hint();
   void reset();
   void left(std::shared_ptr<AbstractBlock> block, int multiplicity);
@@ -31,10 +33,12 @@ class Grid{
   void drop(std::shared_ptr<AbstractBlock> block);
   void clockwise(std::shared_ptr<AbstractBlock> block, int multiplicity);
   void counterClockwise(std::shared_ptr<AbstractBlock> block, int multiplicity);
-  void newBlock(std::shared_ptr<AbstractBlock> block);
+  
+  //Places a new block. Returns a false if unsuccessful.
+  bool newBlock(std::shared_ptr<AbstractBlock> block);
   void setLevel(std::shared_ptr<AbstractLevel> newLevel);
   void replaceBlock(std::shared_ptr<AbstractBlock> currBlock,
                     std::shared_ptr<AbstractBlock> newBlock);
-}
+};
 
 #endif
