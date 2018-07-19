@@ -5,24 +5,24 @@
 
 using namespace std;
 
-IBlock::IBlock(int level, int col, int row) :
-	AbstractBlock{ level, col, row } {}
+IBlock::IBlock(int level, int col, int row, int height = 1) :
+	AbstractBlock{ level, col, row, height } {}
 
 char IBlock::getShape() const {
 	return 'I';
 }
 
-Coordinates IBlock::get1stCell() {
+Coordinates IBlock::get1stCell(int newOrientation) {
 	int col = getCol();
 	int row = getRow();
-	if (orientation == 3) {
+	if (newOrientation == 3) {
+		Coordinates cell{ col , row };
+		return cell;
+	} else if (newOrientation == 2) {
 		Coordinates cell{ col + 3, row };
 		return cell;
-	} else if (orientation == 2) {
-		Coordinates cell{ col + 3, row + 3 };
-		return cell;
-	} else if (orientation == 1) {
-		Coordinates cell{ col, row + 3};
+	} else if (newOrientation == 1) {
+		Coordinates cell{ col, row - 3};
 		return cell;
 	} else {
 		Coordinates cell{ col, row };
@@ -30,17 +30,17 @@ Coordinates IBlock::get1stCell() {
 	}
 }
 
-Coordinates IBlock::get2ndCell() {
+Coordinates IBlock::get2ndCell(int newOrientation) {
 	int col = getCol();
 	int row = getRow();
-	if (orientation == 3) {
-		Coordinates cell{ col + 3, row + 1 };
+	if (newOrientation == 3) {
+		Coordinates cell{ col, row - 1 };
 		return cell;
-	} else if (orientation == 2) {
-		Coordinates cell{ col + 2, row + 3 };
+	} else if (newOrientation == 2) {
+		Coordinates cell{ col + 2, row };
 		return cell;
-	} else if (orientation == 1) {
-		Coordinates cell{ col, row + 2 };
+	} else if (newOrientation == 1) {
+		Coordinates cell{ col, row - 2 };
 		return cell;
 	} else {
 		Coordinates cell{ col + 1, row };
@@ -49,17 +49,17 @@ Coordinates IBlock::get2ndCell() {
 }
 
 
-Coordinates IBlock::get3rdCell() {
+Coordinates IBlock::get3rdCell(int newOrientation) {
 	int col = getCol();
 	int row = getRow();
-	if (orientation == 3) {
-		Coordinates cell{ col + 3, row + 1 };
+	if (newOrientation == 3) {
+		Coordinates cell{ col, row - 2 };
 		return cell;
-	} else if (orientation == 2) {
-		Coordinates cell{ col + 1, row + 3 };
+	} else if (newOrientation == 2) {
+		Coordinates cell{ col + 1, row };
 		return cell;
-	} else if (orientation == 1) {
-		Coordinates cell{ col, row + 1 };
+	} else if (newOrientation == 1) {
+		Coordinates cell{ col, row - 1 };
 		return cell;
 	} else {
 		Coordinates cell{ col + 2, row };
@@ -68,22 +68,38 @@ Coordinates IBlock::get3rdCell() {
 }
 
 
-Coordinates IBlock::get4thCell() {
+Coordinates IBlock::get4thCell(int newOrientation) {
 	int col = getCol();
 	int row = getRow();
-	if (orientation == 3) {
-		Coordinates cell{ col + 3, row };
+	if (newOrientation == 3) {
+		Coordinates cell{ col, row - 3 };
 		return cell;
-	} else if (orientation == 2) {
-		Coordinates cell{ col, row + 3 };
+	} else if (newOrientation == 2) {
+		Coordinates cell{ col, row };
 		return cell;
-	} else if (orientation == 1) {
+	} else if (newOrientation == 1) {
 		Coordinates cell{ col, row };
 		return cell;
 	} else {
 		Coordinates cell{ col + 3, row };
 		return cell;
 	}
-
-
 }
+Coordinates IBlock::get1stCell() {
+	return get1stCell(orientation);
+}
+
+Coordinates IBlock::get2ndCell() {
+	return get2ndCell(orientation);
+}
+
+
+Coordinates IBlock::get3rdCell() {
+	return get3rdCell(orientation);
+}
+
+
+Coordinates IBlock::get4thCell() {
+	return get4thCell(orientation);
+}
+

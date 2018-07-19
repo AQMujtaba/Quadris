@@ -6,7 +6,7 @@
 using namespace std;
 
 AbstractBlock::AbstractBlock(int level, int col, int row):
-	level{ level }, col{ col }, row{ row } {
+	level{ level }, col{ col }, row{ row }, height{ height } {
 	orientation = 0;
 } 
 
@@ -14,7 +14,7 @@ int AbstractBlock::getOrientation() const {
 	return orientation;
 }
 void AbstractBlock::setOrientation(int newOrientation) {
-	orientation = newOrientation;
+	orientation = newOrientation % 4;
 }
 int AbstractBlock::getLevel() {
 	return level;

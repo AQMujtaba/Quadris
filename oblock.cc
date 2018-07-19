@@ -5,24 +5,24 @@
 
 using namespace std;
 
-OBlock::OBlock(int level, int col, int row) :
-	AbstractBlock{ level, col, row } {}
+OBlock::OBlock(int level, int col, int row, int height = 2) :
+	AbstractBlock{ level, col, row, height } {}
 
 char OBlock::getShape() const {
 	return 'O';
 }
 
-Coordinates OBlock::get1stCell() {
+Coordinates OBlock::get1stCell(int newOrientation) {
 	int col = getCol();
 	int row = getRow();
-	if (orientation == 3) {
+	if (newOrientation == 3) {
 		Coordinates cell{ col + 1, row };
 		return cell;
-	} else if (orientation == 2) {
-		Coordinates cell{ col + 1, row + 1 };
+	} else if (newOrientation == 2) {
+		Coordinates cell{ col + 1, row - 1 };
 		return cell;
-	} else if (orientation == 1) {
-		Coordinates cell{ col, row + 1 };
+	} else if (newOrientation == 1) {
+		Coordinates cell{ col, row - 1 };
 		return cell;
 	} else {
 		Coordinates cell{ col, row }; // reference cell is first 'O' cell
@@ -30,16 +30,16 @@ Coordinates OBlock::get1stCell() {
 	}
 }
 
-Coordinates OBlock::get2ndCell() {
+Coordinates OBlock::get2ndCell(int newOrientation) {
 	int col = getCol();
 	int row = getRow();
-	if (orientation == 3) {
-		Coordinates cell{ col + 1, row + 1 };
+	if (newOrientation == 3) {
+		Coordinates cell{ col + 1, row - 1 };
 		return cell;
-	} else if (orientation == 2) {
-		Coordinates cell{ col, row + 1 };
+	} else if (newOrientation == 2) {
+		Coordinates cell{ col, row - 1 };
 		return cell;
-	} else if (orientation == 1) {
+	} else if (newOrientation == 1) {
 		Coordinates cell{ col, row };
 		return cell;
 	} else {
@@ -48,16 +48,16 @@ Coordinates OBlock::get2ndCell() {
 	}
 }
 
-Coordinates OBlock::get3rdCell() {
+Coordinates OBlock::get3rdCell(int newOrientation) {
 	int col = getCol();
 	int row = getRow();
-	if (orientation == 3) {
+	if (newOrientation == 3) {
 		Coordinates cell{ col, row + 1 };
 		return cell;
-	} else if (orientation == 2) {
+	} else if (newOrientation == 2) {
 		Coordinates cell{ col, row };
 		return cell;
-	} else if (orientation == 1) {
+	} else if (newOrientation == 1) {
 		Coordinates cell{ col + 1, row };
 		return cell;
 	} else {
@@ -66,20 +66,35 @@ Coordinates OBlock::get3rdCell() {
 	}
 }
 
-Coordinates OBlock::get4thCell() {
+Coordinates OBlock::get4thCell(int newOrientation) {
 	int col = getCol();
 	int row = getRow();
-	if (orientation == 3) {
+	if (newOrientation == 3) {
 		Coordinates cell{ col, row };
 		return cell;
-	} else if (orientation == 2) {
+	} else if (newOrientation == 2) {
 		Coordinates cell{ col + 1, row };
 		return cell;
-	} else if (orientation == 1) {
-		Coordinates cell{ col + 1, row + 1 };
+	} else if (newOrientation == 1) {
+		Coordinates cell{ col + 1, row - 1 };
 		return cell;
 	} else {
-		Coordinates cell{ col, row + 1 };
+		Coordinates cell{ col, row - 1 };
 		return cell;
 	}
+}
+Coordinates OBlock::get1stCell() {
+	return get1stCell(orientation);
+}
+
+Coordinates OBlock::get2ndCell() {
+	return get2ndCell(orientation);
+}
+
+Coordinates OBlock::get3rdCell() {
+	return get3rdCell(orientation);
+}
+
+Coordinates OBlock::get4thCell() {
+	return get4thCell(orientation);
 }
