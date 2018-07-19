@@ -1,5 +1,12 @@
 #include "level4.h"
 #include "abstractblock.h"
+#include "iblock.h"
+#include "jblock.h"
+#include "lblock.h"
+#include "sblock.h"
+#include "zblock.h"
+#include "oblock.h"
+#include "tblock.h"
 
 using namespace std;
 
