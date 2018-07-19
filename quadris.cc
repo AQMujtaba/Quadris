@@ -83,16 +83,19 @@ void Quadris::Start(){
     }
     else if(aCommand == "I"){
       shared_ptr<AbstractBlock> newBlock = make_shared<IBlock>(currentLevel,0,0);
+      currentBlock->togglePlaced(); // deactivate score addition in DTOR
       theGrid->replaceBlock(currentBlock, newBlock);
       currentBlock = newBlock;
     }
     else if(aCommand == "J"){
       shared_ptr<AbstractBlock> newBlock = make_shared<JBlock>(currentLevel,0,0);
+      currentBlock->togglePlaced(); // deactivate score addition in DTOR
       theGrid->replaceBlock(currentBlock, newBlock);
       currentBlock = newBlock;
     }
     else if(aCommand == "L"){
       shared_ptr<AbstractBlock> newBlock = make_shared<LBlock>(currentLevel,0,0);
+      currentBlock->togglePlaced(); // deactivate score addition in DTOR
       theGrid->replaceBlock(currentBlock, newBlock);
       currentBlock = newBlock;
     }
