@@ -15,6 +15,9 @@ char IBlock::getShape() const {
 Coordinates IBlock::get1stCell(int newOrientation) {
 	int col = getCol();
 	int row = getRow();
+
+	newOrientation = ((newOrientation % 4 + 4) % 4); // math equivalent to 
+													 // newOrientation % 4
 	if (newOrientation == 3) {
 		Coordinates cell{ col , row };
 		return cell;
@@ -33,6 +36,10 @@ Coordinates IBlock::get1stCell(int newOrientation) {
 Coordinates IBlock::get2ndCell(int newOrientation) {
 	int col = getCol();
 	int row = getRow();
+
+	newOrientation = ((newOrientation % 4 + 4) % 4); // math equivalent to 
+													 // newOrientation % 4
+
 	if (newOrientation == 3) {
 		Coordinates cell{ col, row - 1 };
 		return cell;
@@ -52,6 +59,10 @@ Coordinates IBlock::get2ndCell(int newOrientation) {
 Coordinates IBlock::get3rdCell(int newOrientation) {
 	int col = getCol();
 	int row = getRow();
+
+	newOrientation = ((newOrientation % 4 + 4) % 4); // math equivalent to 
+													 // newOrientation % 4
+
 	if (newOrientation == 3) {
 		Coordinates cell{ col, row - 2 };
 		return cell;
@@ -71,6 +82,10 @@ Coordinates IBlock::get3rdCell(int newOrientation) {
 Coordinates IBlock::get4thCell(int newOrientation) {
 	int col = getCol();
 	int row = getRow();
+
+	newOrientation = ((newOrientation % 4 + 4) % 4); // math equivalent to 
+													 // newOrientation % 4
+	
 	if (newOrientation == 3) {
 		Coordinates cell{ col, row - 3 };
 		return cell;

@@ -14,7 +14,8 @@ int AbstractBlock::getOrientation() const {
 	return orientation;
 }
 void AbstractBlock::setOrientation(int newOrientation) {
-	orientation = newOrientation % 4;
+	orientation = ((newOrientation % 4 + 4) % 4); // math equivalent to 
+												  // newOrientation % 4
 }
 int AbstractBlock::getLevel() {
 	return level;

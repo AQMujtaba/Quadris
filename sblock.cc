@@ -15,6 +15,10 @@ char SBlock::getShape() const {
 Coordinates SBlock::get1stCell(int newOrientation) {
 	int col = getCol();
 	int row = getRow();
+
+	newOrientation = ((newOrientation % 4 + 4) % 4); // math equivalent to 
+													 // newOrientation % 4
+
 	if (newOrientation == 3) {
 		Coordinates cell{ col + 1, row };
 		return cell;
@@ -33,6 +37,10 @@ Coordinates SBlock::get1stCell(int newOrientation) {
 Coordinates SBlock::get2ndCell(int newOrientation) {
 	int col = getCol();
 	int row = getRow();
+
+	newOrientation = ((newOrientation % 4 + 4) % 4); // math equivalent to 
+													 // newOrientation % 4
+
 	if (newOrientation == 3) {
 		Coordinates cell{ col + 1, row - 1};
 		return cell;
@@ -51,6 +59,10 @@ Coordinates SBlock::get2ndCell(int newOrientation) {
 Coordinates SBlock::get3rdCell(int newOrientation) {
 	int col = getCol();
 	int row = getRow();
+
+	newOrientation = ((newOrientation % 4 + 4) % 4); // math equivalent to 
+													 // newOrientation % 4
+
 	if (newOrientation == 3) {
 		Coordinates cell{ col + 2, row };
 		return cell;
@@ -69,6 +81,10 @@ Coordinates SBlock::get3rdCell(int newOrientation) {
 Coordinates SBlock::get4thCell() {
 	int col = getCol();
 	int row = getRow();
+
+	newOrientation = ((newOrientation % 4 + 4) % 4); // math equivalent to 
+													 // newOrientation % 4
+	
 	if (newOrientation == 3) {
 		Coordinates cell{ col, row - 1 };
 		return cell;
