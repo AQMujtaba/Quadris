@@ -25,6 +25,7 @@ seed{seed}, seqFile{seqFile}, scoreKeeper{make_unique<ScoreKeeper>()},
 commandInterpreter{make_unique<CommandInterpreter>()}, theGrid{make_unique<Grid>()}{
   setLevel(startLevel);
   theGrid->setLevel(currentLevel->getLevel());
+  // haven't initialized/defined currentBlock anywhere
 }
 
 void Quadris::Start(){
