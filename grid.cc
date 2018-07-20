@@ -6,8 +6,10 @@ using namespace std;
 
 void Grid::checkRows(){
   int clearCount = 0;
-  for(int rowIndex = gridHeight-1; rowIndex > 0; rowIndex--){
+  cerr << "about to check rows" << endl;
+  for(int rowIndex = gridHeight-1; rowIndex >= 0; rowIndex--){
     bool allFilled = true;
+    cerr << "checking row "<< rowIndex << endl;
     for(int colIndex = 0; colIndex < gridWidth; colIndex++){
       if(theGrid[rowIndex][colIndex].getBlock() == nullptr){
         allFilled = false;
@@ -48,7 +50,7 @@ void Grid::dropSingleBlock(){
   // ***** Implement when Single Block is implemented
 }
 
-Grid::Grid(bool textOnly, int currentLevel, std::shared_ptr<ScoreKeeper> scoreKeeper): textOnly{textOnly}, currentLevel{currentLevel}, td{make_shared<TextDisplay>(currentLevel, scoreKeeper)}, gd{textOnly ? nullptr : make_shared<GraphicsDisplay>(currentLevel, scoreKeeper)}{
+Grid::Grid(bool textOnly, int currentLevel, std::shared_ptr<ScoreKeeper> scoreKeeper): textOnly{textOnly}, currentLevel{currentLevel}, td{make_shared<TextDisplay>(currentLevel, scoreKeeper)}, gd{textOnly ? nullptr : make_shared<GraphicsDisplay>(currentLevel, scoreKeeper)}, scoreKeeper{scoreKeeper}{
   for(int rowIndex = 0; rowIndex < gridHeight; rowIndex++){
     vector<Cell> rowVec;
     for(int colIndex = 0; colIndex < gridWidth; colIndex++){
@@ -312,4 +314,9 @@ void Grid::replaceBlock(std::shared_ptr<AbstractBlock> currBlock,
     theGrid[currC3.row][currC3.col].setBlock(currBlock);
     theGrid[currC4.row][currC4.col].setBlock(currBlock);
   }
+}
+
+ostream &operator<<(ostream &out, const Grid &grid){
+  out << *(grid.td);
+  return out;
 }

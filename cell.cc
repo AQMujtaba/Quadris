@@ -20,6 +20,7 @@ shared_ptr<AbstractBlock> Cell::getBlock() const{
 void Cell::setBlock(shared_ptr<AbstractBlock> newBlock){
   if(canAddBlock(newBlock)){
     block = newBlock;
+    notifyObservers();
   }
 }
 
@@ -39,6 +40,7 @@ bool Cell::canAddBlock(shared_ptr<AbstractBlock> newBlock) const{
 
 void Cell::clearCell() {
   block = nullptr;
+  notifyObservers();
 }
 
 Info Cell::getInfo() const {

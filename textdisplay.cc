@@ -5,7 +5,7 @@ using namespace std;
 
 TextDisplay::TextDisplay(int currentLevel, std::shared_ptr<ScoreKeeper> scoreKeeper):
 currentLevel{currentLevel}, scoreKeeper{scoreKeeper},
-theDisplay{vector<vector<char>>(18, vector<char>(11, ' '))}{}
+theDisplay{vector<vector<char>>(18, vector<char>(11,' '))}{}
 
 void TextDisplay::notify(Subject &whoNotified){
   Info myInfo = whoNotified.getInfo();

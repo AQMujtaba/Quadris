@@ -18,12 +18,15 @@ string CommandInterpreter::interpretCommand(string command, int &multiplier){
   
   vector<string> possibleCommands = {"left", "right", "down", "clockwise", "counterclockwise", "drop", "levelup", "leveldown", "norandom", "random", "sequence", "I", "J", "L", "restart", "hint"};
   
-  for (std::vector<string>::iterator i = possibleCommands.begin(); i != possibleCommands.end(); i++) {
-    if((*i).find(command) != 0){
-      possibleCommands.erase(i);
+  int i = 0;
+  while(i < (int)possibleCommands.size()){
+    if(possibleCommands[i].find(command) != 0){
+      possibleCommands.erase(possibleCommands.begin()+i);
+    }
+    else{
+      i++;
     }
   }
-  
   if(possibleCommands.size() == 1){
     return possibleCommands[0];
   }

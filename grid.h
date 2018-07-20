@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <vector>
+#include <iostream>
 #include "abstractblock.h"
 #include "scorekeeper.h"
 #include "cell.h"
@@ -41,6 +42,7 @@ class Grid{
   void setLevel(int newLevel);
   void replaceBlock(std::shared_ptr<AbstractBlock> currBlock,
                     std::shared_ptr<AbstractBlock> newBlock);
+  friend std::ostream &operator<<(std::ostream &out, const Grid &grid);
 };
 
 #endif

@@ -43,6 +43,9 @@ myInterpreter{make_unique<CommandInterpreter>()}, scoreKeeper{make_shared<ScoreK
 void Quadris::Start(){
   currentBlock = currentLevel->createBlock();
   theGrid->newBlock(currentBlock);
+  
+  cout << *theGrid;
+  
   string aCommand;
   
   while (cin >> aCommand) {
@@ -125,5 +128,6 @@ void Quadris::Start(){
     else if(aCommand == "noCommand"){
       cerr << "INVALID COMMAND" << endl;
     }
+    cout << *theGrid;
   }
 }
