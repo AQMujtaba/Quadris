@@ -41,6 +41,8 @@ myInterpreter{make_unique<CommandInterpreter>()}, scoreKeeper{make_shared<ScoreK
 }
 
 void Quadris::Start(){
+  currentBlock = currentLevel->createBlock();
+  theGrid->newBlock(currentBlock);
   string aCommand;
   
   while (cin >> aCommand) {
@@ -66,6 +68,7 @@ void Quadris::Start(){
       for(int i = 0; i < multiplier; i++){
         theGrid->drop(currentBlock);
         currentBlock = currentLevel->createBlock(); // ****** "AbstractLevel has no createBlock()"
+        theGrid->newBlock(currentBlock);
       }
     }
     else if(aCommand == "levelup"){
