@@ -8,9 +8,9 @@
 class AbstractBlock;
 
 class AbstractLevel {
-  int seed;
   std::string seqFile;
  protected:
+  int seed;
   std::vector<char> blockSeq;
   bool random;
   int seqPos;

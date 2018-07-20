@@ -7,7 +7,7 @@
 
 class AbstractBlock;
 
-class Level3: public AbstractLevel {
+class Level4: public AbstractLevel {
 public:
   Level4(std::string seqFile = "sequence.txt", int seed = 1);
   void setRandom(bool r) override;

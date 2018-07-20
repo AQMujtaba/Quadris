@@ -21,7 +21,7 @@ class Quadris {
   void setLevel(int level);
  public:
   Quadris(bool textOnly, int seed, std::string seqFile, int startLevel);
-  void start();
+  void Start();
 };
 
 #endif

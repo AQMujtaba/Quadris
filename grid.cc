@@ -45,7 +45,7 @@ void Grid::shiftRowsDown(int startRow){
 }
 
 void Grid::dropSingleBlock(){
-  //Implement when Single Block is implemented
+  // ***** Implement when Single Block is implemented
 }
 
 Grid::Grid(int currentLevel, std::shared_ptr<ScoreKeeper> scoreKeeper): currentLevel{currentLevel}, td{make_shared<TextDisplay>(currentLevel, scoreKeeper)}, gd{make_shared<GraphicsDisplay>(currentLevel, scoreKeeper)}{
@@ -309,4 +309,3 @@ void Grid::replaceBlock(std::shared_ptr<AbstractBlock> currBlock,
     theGrid[currC4.row][currC4.col].setBlock(currBlock);
   }
 }
-

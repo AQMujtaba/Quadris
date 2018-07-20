@@ -10,13 +10,13 @@ int ScoreKeeper::getHighScore() const {
   return highScore;
 }
 
-void addScore(int amount) {
+void ScoreKeeper::addScore(int amount) {
   score += amount;
   if(score > highScore){
     highScore = score;
   }
 }
 
-void resetScore() {
+void ScoreKeeper::resetScore() {
   score = 0;
 }

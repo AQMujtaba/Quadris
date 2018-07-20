@@ -2,6 +2,7 @@
 #define _subject_
 
 #include <vector>
+#include <memory>
 #include "info.h"
 
 class Observer;

@@ -1,4 +1,16 @@
 #include "quadris.h"
+#include "iblock.h"
+#include "jblock.h"
+#include "lblock.h"
+#include "oblock.h"
+#include "sblock.h"
+#include "tblock.h"
+#include "zblock.h"
+#include "level0.h"
+#include "level1.h"
+#include "level2.h"
+#include "level3.h"
+#include "level4.h"
 
 using namespace std;
 
@@ -25,13 +37,12 @@ seed{seed}, seqFile{seqFile}, scoreKeeper{make_unique<ScoreKeeper>()},
 myInterpreter{make_unique<CommandInterpreter>()}, theGrid{make_unique<Grid>()}{
   setLevel(startLevel);
   theGrid->setLevel(currentLevel->getLevel());
-  // haven't initialized/defined currentBlock anywhere
 }
 
 void Quadris::Start(){
   string aCommand;
   
-  (while cin >> aCommand){
+  while (cin >> aCommand) {
     int multiplier;
     aCommand = myInterpreter->interpretCommand(aCommand, multiplier);
     
@@ -39,7 +50,7 @@ void Quadris::Start(){
       theGrid->left(currentBlock, multiplier);
     }
     else if(aCommand == "right"){
-      theGrid->right(currentBlock multiplier);
+      theGrid->right(currentBlock, multiplier);
     }
     else if(aCommand == "down"){
       theGrid->down(currentBlock, multiplier);
@@ -53,7 +64,7 @@ void Quadris::Start(){
     else if(aCommand == "drop"){
       for(int i = 0; i < multiplier; i++){
         theGrid->drop(currentBlock);
-        currentBlock = currentLevel->createBlock();
+        currentBlock = currentLevel->createBlock(); // ****** "AbstractLevel has no createBlock()"
       }
     }
     else if(aCommand == "levelup"){
@@ -73,7 +84,7 @@ void Quadris::Start(){
       }
     }
     else if(aCommand == "random"){
-      currentLevel->setLevel(true);
+      currentLevel->setLevel(true); // ******* "AbstractLevel has no setLevel"
     }
     else if(aCommand == "sequence"){
       string newFile;
@@ -107,7 +118,7 @@ void Quadris::Start(){
     else if(aCommand == "hint"){
       theGrid->hint();
     }
-    else if(aCommand == noCommand){
+    else if(aCommand == "noCommand"){
       cerr << "INVALID COMMAND" << endl;
     }
   }
