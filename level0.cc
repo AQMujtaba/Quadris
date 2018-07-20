@@ -10,7 +10,7 @@
 
 using namespace std;
 
-Level0::Level0(std::string seqFile): AbstractLevel{false, seqFile}{}
+Level0::Level0(std::string seqFile, int seed): AbstractLevel{false, seqFile, seed}{}
 
 void Level0::setRandom(bool r){
   (void)r;
@@ -22,7 +22,7 @@ int Level0::getLevel(){
 }
 
 shared_ptr<AbstractBlock> Level0::createBlock(){
-  if(seqPos != (blockSeq.size()-1)){
+  if(seqPos != (int)(blockSeq.size()-1)){
     char block = blockSeq[seqPos];
     if(block == 'I') {
     return make_shared<IBlock>(0, 0, 0, nullptr);

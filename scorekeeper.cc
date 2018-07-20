@@ -1,6 +1,6 @@
-#include scorekeeper.h
+#include "scorekeeper.h"
 
-ScoreKeeper::ScoreKeeper(score = 0, highScore = 0): score{score}, highScore{highScore}{}
+ScoreKeeper::ScoreKeeper(int score, int highScore): score{score}, highScore{highScore}{}
 
 int ScoreKeeper::getScore() const {
   return score;

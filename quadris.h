@@ -11,7 +11,6 @@
 
 class Quadris {
   int seed;
-  bool textOnly;
   std::string seqFile;
   std::unique_ptr<Grid> theGrid;
   std::unique_ptr<CommandInterpreter> myInterpreter;

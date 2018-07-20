@@ -16,27 +16,28 @@ using namespace std;
 
 void Quadris::setLevel(int level){
   if(level <= 0){
-    currentLevel = make_shared<level0>(seqFile, seed);
+    currentLevel = make_shared<Level0>(seqFile, seed);
   }
   else if(level == 1){
-    currentLevel = make_shared<level1>(seqFile, seed);
+    currentLevel = make_shared<Level1>(seqFile, seed);
   }
   else if(level == 2){
-    currentLevel = make_shared<level2>(seqFile, seed);
+    currentLevel = make_shared<Level2>(seqFile, seed);
   }
   else if(level == 3){
-    currentLevel = make_shared<level3>(seqFile, seed);
+    currentLevel = make_shared<Level3>(seqFile, seed);
   }
   else{
-    currentLevel = make_shared<level0>(seqFile, seed);
+    currentLevel = make_shared<Level0>(seqFile, seed);
   }
 }
 
-Quadris::Quadris(bool textOnly, int seed, std::string seqFile, int startLevel): textOnly{textOnly},
-seed{seed}, seqFile{seqFile}, scoreKeeper{make_unique<ScoreKeeper>()},
-myInterpreter{make_unique<CommandInterpreter>()}, theGrid{make_unique<Grid>()}{
+Quadris::Quadris(bool textOnly, int seed, std::string seqFile, int startLevel):
+seed{seed}, seqFile{seqFile},
+theGrid{nullptr},
+myInterpreter{make_unique<CommandInterpreter>()}, scoreKeeper{make_shared<ScoreKeeper>()} {
   setLevel(startLevel);
-  theGrid->setLevel(currentLevel->getLevel());
+  theGrid = make_unique<Grid>(textOnly, currentLevel->getLevel(), scoreKeeper);
 }
 
 void Quadris::Start(){
@@ -84,7 +85,7 @@ void Quadris::Start(){
       }
     }
     else if(aCommand == "random"){
-      currentLevel->setLevel(true); // ******* "AbstractLevel has no setLevel"
+      currentLevel->setRandom(true);
     }
     else if(aCommand == "sequence"){
       string newFile;
@@ -94,19 +95,19 @@ void Quadris::Start(){
       }
     }
     else if(aCommand == "I"){
-      shared_ptr<AbstractBlock> newBlock = make_shared<IBlock>(currentLevel,0,0);
+      shared_ptr<AbstractBlock> newBlock = make_shared<IBlock>(currentLevel->getLevel(),0,0, scoreKeeper);
       currentBlock->togglePlaced(); // deactivate score addition in DTOR
       theGrid->replaceBlock(currentBlock, newBlock);
       currentBlock = newBlock;
     }
     else if(aCommand == "J"){
-      shared_ptr<AbstractBlock> newBlock = make_shared<JBlock>(currentLevel,0,0);
+      shared_ptr<AbstractBlock> newBlock = make_shared<JBlock>(currentLevel->getLevel(),0,0, scoreKeeper);
       currentBlock->togglePlaced(); // deactivate score addition in DTOR
       theGrid->replaceBlock(currentBlock, newBlock);
       currentBlock = newBlock;
     }
     else if(aCommand == "L"){
-      shared_ptr<AbstractBlock> newBlock = make_shared<LBlock>(currentLevel,0,0);
+      shared_ptr<AbstractBlock> newBlock = make_shared<LBlock>(currentLevel->getLevel(),0,0,scoreKeeper);
       currentBlock->togglePlaced(); // deactivate score addition in DTOR
       theGrid->replaceBlock(currentBlock, newBlock);
       currentBlock = newBlock;

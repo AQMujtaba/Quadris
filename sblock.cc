@@ -79,7 +79,7 @@ Coordinates SBlock::get3rdCell(int newOrientation) {
 	}
 }
 
-Coordinates SBlock::get4thCell() {
+Coordinates SBlock::get4thCell(int newOrientation) {
 	int col = getCol();
 	int row = getRow();
 

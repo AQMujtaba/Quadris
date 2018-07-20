@@ -48,13 +48,15 @@ void Grid::dropSingleBlock(){
   // ***** Implement when Single Block is implemented
 }
 
-Grid::Grid(int currentLevel, std::shared_ptr<ScoreKeeper> scoreKeeper): currentLevel{currentLevel}, td{make_shared<TextDisplay>(currentLevel, scoreKeeper)}, gd{make_shared<GraphicsDisplay>(currentLevel, scoreKeeper)}{
+Grid::Grid(bool textOnly, int currentLevel, std::shared_ptr<ScoreKeeper> scoreKeeper): textOnly{textOnly}, currentLevel{currentLevel}, td{make_shared<TextDisplay>(currentLevel, scoreKeeper)}, gd{textOnly ? nullptr : make_shared<GraphicsDisplay>(currentLevel, scoreKeeper)}{
   for(int rowIndex = 0; rowIndex < gridHeight; rowIndex++){
     vector<Cell> rowVec;
     for(int colIndex = 0; colIndex < gridWidth; colIndex++){
       rowVec.emplace_back(Cell{rowIndex, colIndex});
       rowVec[colIndex].attach(td);
-      rowVec[colIndex].attach(gd);
+      if(!textOnly){
+        rowVec[colIndex].attach(gd);
+      }
     }
     theGrid.push_back(rowVec);
   }
@@ -266,7 +268,9 @@ bool Grid::newBlock(std::shared_ptr<AbstractBlock> block){
 void Grid::setLevel(int newLevel){
   currentLevel = newLevel;
   td->setLevel(currentLevel);
-  gd->setLevel(currentLevel);
+  if(!textOnly){
+    gd->setLevel(currentLevel);
+  }
 }
 
 void Grid::replaceBlock(std::shared_ptr<AbstractBlock> currBlock,

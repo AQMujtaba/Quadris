@@ -12,7 +12,7 @@ public:
   Level1(std::string seqFile = "sequence.txt", int seed = 1);
   void setRandom(bool r) override;
   int getLevel() override;
-  std::shared_pointer<AbstractBlock> createBlock() override;
+  std::shared_ptr<AbstractBlock> createBlock() override;
 };
 
 #endif

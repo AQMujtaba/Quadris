@@ -13,6 +13,7 @@ class TextDisplay;
 class Grid{
   const int gridHeight = 18;
   const int gridWidth = 11;
+  bool textOnly;
   int currentLevel;
   int blocksSinceClear;
   std::vector<std::vector<Cell>> theGrid;
@@ -25,7 +26,7 @@ class Grid{
   void shiftRowsDown(int startRow);
   void dropSingleBlock();
  public:
-  Grid(int currentLevel, std::shared_ptr<ScoreKeeper> scoreKeeper);
+  Grid(bool textOnly, int currentLevel, std::shared_ptr<ScoreKeeper> scoreKeeper);
   void hint();
   void reset();
   void left(std::shared_ptr<AbstractBlock> block, int multiplicity);
