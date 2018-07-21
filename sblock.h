@@ -3,7 +3,6 @@
 
 #include <memory>
 #include "abstractblock.h"
-#include "abstractlevel.h"
 #include "cell.h"
 
 class SBlock : public AbstractBlock {

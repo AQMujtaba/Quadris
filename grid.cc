@@ -1,6 +1,7 @@
 #include "grid.h"
 #include "textdisplay.h"
 #include "graphicsdisplay.h"
+#include "singleblock.h"
 
 using namespace std;
 
@@ -47,7 +48,14 @@ void Grid::shiftRowsDown(int startRow){
 }
 
 void Grid::dropSingleBlock(){
-  // ***** Implement when Single Block is implemented
+  shared_ptr<SingleBlock> newBlock;
+  newBlock = make_shared<SingleBlock>(0,0,0, scoreKeeper);
+  newBlock->togglePlaced();
+  int rowIndex = gridHeight-1;
+  while(rowIndex >= 0 && theGrid[rowIndex][5].canAddBlock(newBlock)){
+    rowIndex++;
+  }
+  theGrid[rowIndex][5].setBlock(newBlock);
 }
 
 Grid::Grid(bool textOnly, int currentLevel, std::shared_ptr<ScoreKeeper> scoreKeeper): textOnly{textOnly}, currentLevel{currentLevel}, td{make_shared<TextDisplay>(currentLevel, scoreKeeper)}, gd{textOnly ? nullptr : make_shared<GraphicsDisplay>(currentLevel, scoreKeeper)}, scoreKeeper{scoreKeeper}{
@@ -69,11 +77,14 @@ void Grid::hint(){
 }
 
 void Grid::reset(){
+  cerr << "Resetting Grid" << endl;
   for(int rowIndex = 0; rowIndex < gridHeight; rowIndex++){
+    cerr << "Resetting Row " << rowIndex << endl;
     for(int colIndex = 0; colIndex < gridWidth; colIndex++){
       theGrid[rowIndex][colIndex].clearCell();
     }
   }
+  cerr << "Done resetting grid" << endl;
 }
 
 void Grid::left(std::shared_ptr<AbstractBlock> block, int multiplicity){
