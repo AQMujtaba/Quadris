@@ -84,13 +84,17 @@ void Quadris::Start(){
     }
     else if(aCommand == "levelup"){
       int curr = currentLevel->getLevel();
-      setLevel(curr+1);
-      theGrid->setLevel(currentLevel->getLevel());
+      if (curr + 1 <= 4) { // check if between levels 0 - 4
+        setLevel(curr + 1);
+        theGrid->setLevel(currentLevel->getLevel());
+      }
     }
     else if(aCommand == "leveldown"){
       int curr = currentLevel->getLevel();
-      setLevel(curr-1);
-      theGrid->setLevel(currentLevel->getLevel());
+      if (curr - 1 >= 0) { // check if between levels 0 - 4
+        setLevel(curr - 1);
+        theGrid->setLevel(currentLevel->getLevel());
+      }
     }
     else if(aCommand == "norandom"){
       string newFile;

@@ -10,7 +10,9 @@
 
 using namespace std;
 
-Level4::Level4(std::string seqFile, int seed): AbstractLevel{true, seqFile, seed}{}
+Level4::Level4(std::string seqFile, int seed): AbstractLevel{true, seqFile, seed}{
+  srand(seed);
+}
 
 void Level4::setRandom(bool r){
   random = r;
@@ -23,8 +25,7 @@ int Level4::getLevel(){
 shared_ptr<AbstractBlock> Level4::createBlock(){
   if(random){
 
-  srand(seed);
-    int n = rand() % 9; // ****** same odds as level 3?
+    int n = rand() % 9; 
 
     if(n == 0 || n == 1) {
       return make_shared<SBlock>(4, 0, 0, nullptr);
