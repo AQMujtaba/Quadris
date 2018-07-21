@@ -25,6 +25,7 @@ class AbstractBlock{
   int getCol() const;
   void setRow(int newRow);
   void setCol(int newCol);
+  void setScoreKeeper(std::shared_ptr<ScoreKeeper> newScore);
   bool isHeavy() const; // true for levels 3+
   Coordinates getReference() const;
   virtual char getShape() const = 0;

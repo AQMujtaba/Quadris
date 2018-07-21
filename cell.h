@@ -18,7 +18,7 @@ class Cell: public Subject {
   void setBlock(std::shared_ptr<AbstractBlock> newBlock);
   bool isEmpty() const;
   bool canAddBlock(std::shared_ptr<AbstractBlock> newBlock) const;
-  void clearCell();
+  void clearCell(bool score);
   Info getInfo() const override;
 };
 

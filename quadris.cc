@@ -43,6 +43,7 @@ myInterpreter{make_unique<CommandInterpreter>()}, scoreKeeper{make_shared<ScoreK
 void Quadris::Start(){
   bool gameOver = false;
   currentBlock = currentLevel->createBlock();
+  currentBlock->setScoreKeeper(scoreKeeper);
   theGrid->newBlock(currentBlock);
   
   cout << *theGrid;
@@ -74,7 +75,8 @@ void Quadris::Start(){
     else if(aCommand == "drop"){
       for(int i = 0; i < multiplier; i++){
         theGrid->drop(currentBlock);
-        currentBlock = currentLevel->createBlock(); // ****** "AbstractLevel has no createBlock()"
+        currentBlock = currentLevel->createBlock();
+        currentBlock->setScoreKeeper(scoreKeeper);
         if(!theGrid->newBlock(currentBlock)){
           gameOver = true;
         }
@@ -129,6 +131,9 @@ void Quadris::Start(){
     else if(aCommand == "restart"){
       scoreKeeper->resetScore();
       theGrid->reset();
+      currentBlock = currentLevel->createBlock();
+      currentBlock->setScoreKeeper(scoreKeeper);
+      theGrid->newBlock(currentBlock);
     }
     else if(aCommand == "hint"){
       theGrid->hint();

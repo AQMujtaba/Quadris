@@ -30,7 +30,7 @@ void Grid::checkRows(){
 
 void Grid::clearRow(int row){
   for(int colIndex = 0; colIndex < gridWidth; colIndex++){
-    theGrid[row][colIndex].clearCell();
+    theGrid[row][colIndex].clearCell(true);
   }
 }
 
@@ -40,7 +40,7 @@ void Grid::shiftRowsDown(int startRow){
       shared_ptr<AbstractBlock> newBlock = theGrid[startRow-1][colIndex].getBlock();
       if(newBlock != nullptr){
         theGrid[startRow][colIndex].setBlock(newBlock);
-        theGrid[startRow-1][colIndex].clearCell();
+        theGrid[startRow-1][colIndex].clearCell(true);
       }
     }
     shiftRowsDown(startRow - 1);
@@ -77,14 +77,11 @@ void Grid::hint(){
 }
 
 void Grid::reset(){
-  cerr << "Resetting Grid" << endl;
   for(int rowIndex = 0; rowIndex < gridHeight; rowIndex++){
-    cerr << "Resetting Row " << rowIndex << endl;
     for(int colIndex = 0; colIndex < gridWidth; colIndex++){
-      theGrid[rowIndex][colIndex].clearCell();
+      theGrid[rowIndex][colIndex].clearCell(false);
     }
   }
-  cerr << "Done resetting grid" << endl;
 }
 
 void Grid::left(std::shared_ptr<AbstractBlock> block, int multiplicity){
@@ -92,10 +89,10 @@ void Grid::left(std::shared_ptr<AbstractBlock> block, int multiplicity){
   Coordinates c2 = block->get2ndCell();
   Coordinates c3 = block->get3rdCell();
   Coordinates c4 = block->get4thCell();
-  theGrid[c1.row][c1.col].clearCell();
-  theGrid[c2.row][c2.col].clearCell();
-  theGrid[c3.row][c3.col].clearCell();
-  theGrid[c4.row][c4.col].clearCell();
+  theGrid[c1.row][c1.col].clearCell(true);
+  theGrid[c2.row][c2.col].clearCell(true);
+  theGrid[c3.row][c3.col].clearCell(true);
+  theGrid[c4.row][c4.col].clearCell(true);
   int i = 0;
   while(i < multiplicity && c1.col > 0 && c2.col > 0
         && c3.col > 0 && c4.col > 0
@@ -125,10 +122,10 @@ void Grid::right(std::shared_ptr<AbstractBlock> block, int multiplicity){
   Coordinates c2 = block->get2ndCell();
   Coordinates c3 = block->get3rdCell();
   Coordinates c4 = block->get4thCell();
-  theGrid[c1.row][c1.col].clearCell();
-  theGrid[c2.row][c2.col].clearCell();
-  theGrid[c3.row][c3.col].clearCell();
-  theGrid[c4.row][c4.col].clearCell();
+  theGrid[c1.row][c1.col].clearCell(true);
+  theGrid[c2.row][c2.col].clearCell(true);
+  theGrid[c3.row][c3.col].clearCell(true);
+  theGrid[c4.row][c4.col].clearCell(true);
   int i = 0;
   while(i < multiplicity && c1.col < 10 && c2.col < 10
         && c3.col < 10 && c4.col < 10
@@ -158,10 +155,10 @@ void Grid::down(std::shared_ptr<AbstractBlock> block, int multiplicity){
   Coordinates c2 = block->get2ndCell();
   Coordinates c3 = block->get3rdCell();
   Coordinates c4 = block->get4thCell();
-  theGrid[c1.row][c1.col].clearCell();
-  theGrid[c2.row][c2.col].clearCell();
-  theGrid[c3.row][c3.col].clearCell();
-  theGrid[c4.row][c4.col].clearCell();
+  theGrid[c1.row][c1.col].clearCell(true);
+  theGrid[c2.row][c2.col].clearCell(true);
+  theGrid[c3.row][c3.col].clearCell(true);
+  theGrid[c4.row][c4.col].clearCell(true);
   int i = 0;
   while(i < multiplicity && c1.row < gridHeight - 1 && c2.row < gridHeight - 1
         && c3.row < gridHeight - 1 && c4.row < gridHeight - 1
@@ -187,10 +184,10 @@ void Grid::drop(std::shared_ptr<AbstractBlock> block){
   Coordinates c2 = block->get2ndCell();
   Coordinates c3 = block->get3rdCell();
   Coordinates c4 = block->get4thCell();
-  theGrid[c1.row][c1.col].clearCell();
-  theGrid[c2.row][c2.col].clearCell();
-  theGrid[c3.row][c3.col].clearCell();
-  theGrid[c4.row][c4.col].clearCell();
+  theGrid[c1.row][c1.col].clearCell(true);
+  theGrid[c2.row][c2.col].clearCell(true);
+  theGrid[c3.row][c3.col].clearCell(true);
+  theGrid[c4.row][c4.col].clearCell(true);
   while(c1.row < gridHeight - 1 && c2.row < gridHeight - 1
         && c3.row < gridHeight - 1 && c4.row < gridHeight - 1
         && theGrid[c1.row + 1][c1.col].canAddBlock(block)
@@ -227,10 +224,10 @@ void Grid::clockwise(std::shared_ptr<AbstractBlock> block, int multiplicity){
          && theGrid[newc2.row][newc2.col].canAddBlock(block)
          && theGrid[newc3.row][newc3.col].canAddBlock(block)
          && theGrid[newc4.row][newc4.col].canAddBlock(block)){
-        theGrid[c1.row][c1.col].clearCell();
-        theGrid[c2.row][c2.col].clearCell();
-        theGrid[c3.row][c3.col].clearCell();
-        theGrid[c4.row][c4.col].clearCell();
+        theGrid[c1.row][c1.col].clearCell(true);
+        theGrid[c2.row][c2.col].clearCell(true);
+        theGrid[c3.row][c3.col].clearCell(true);
+        theGrid[c4.row][c4.col].clearCell(true);
         theGrid[newc1.row][newc1.col].setBlock(block);
         theGrid[newc2.row][newc2.col].setBlock(block);
         theGrid[newc3.row][newc3.col].setBlock(block);
@@ -258,10 +255,10 @@ void Grid::counterClockwise(std::shared_ptr<AbstractBlock> block, int multiplici
          && theGrid[newc2.row][newc2.col].canAddBlock(block)
          && theGrid[newc3.row][newc3.col].canAddBlock(block)
          && theGrid[newc4.row][newc4.col].canAddBlock(block)){
-        theGrid[c1.row][c1.col].clearCell();
-        theGrid[c2.row][c2.col].clearCell();
-        theGrid[c3.row][c3.col].clearCell();
-        theGrid[c4.row][c4.col].clearCell();
+        theGrid[c1.row][c1.col].clearCell(true);
+        theGrid[c2.row][c2.col].clearCell(true);
+        theGrid[c3.row][c3.col].clearCell(true);
+        theGrid[c4.row][c4.col].clearCell(true);
         theGrid[newc1.row][newc1.col].setBlock(block);
         theGrid[newc2.row][newc2.col].setBlock(block);
         theGrid[newc3.row][newc3.col].setBlock(block);
@@ -323,10 +320,10 @@ void Grid::replaceBlock(std::shared_ptr<AbstractBlock> currBlock,
   Coordinates currC4 = currBlock->get4thCell();
   
   //Clear current block's cells (possibly temporarily);
-  theGrid[currC1.row][currC1.col].clearCell();
-  theGrid[currC2.row][currC2.col].clearCell();
-  theGrid[currC3.row][currC3.col].clearCell();
-  theGrid[currC4.row][currC4.col].clearCell();
+  theGrid[currC1.row][currC1.col].clearCell(true);
+  theGrid[currC2.row][currC2.col].clearCell(true);
+  theGrid[currC3.row][currC3.col].clearCell(true);
+  theGrid[currC4.row][currC4.col].clearCell(true);
   
   Coordinates newC1 = newBlock->get1stCell();
   Coordinates newC2 = newBlock->get2ndCell();

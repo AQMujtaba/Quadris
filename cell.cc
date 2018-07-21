@@ -38,9 +38,14 @@ bool Cell::canAddBlock(shared_ptr<AbstractBlock> newBlock) const{
   return false;
 }
 
-void Cell::clearCell() {
-  block = nullptr;
-  notifyObservers();
+void Cell::clearCell(bool score) {
+  if(block){
+    if(!score){
+      block->togglePlaced();
+    }
+    block = nullptr;
+    notifyObservers();
+  }
 }
 
 Info Cell::getInfo() const {

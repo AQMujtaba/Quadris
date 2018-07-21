@@ -47,6 +47,12 @@ void AbstractBlock::setRow(int newRow) {
 void AbstractBlock::setCol(int newCol) {
 	col = newCol;
 }
+
+void AbstractBlock::setScoreKeeper(std::shared_ptr<ScoreKeeper> newScore){
+  score = newScore;
+}
+
+
 bool AbstractBlock::isHeavy() const {
 	return (level >= 3);
 }
