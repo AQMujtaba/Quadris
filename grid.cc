@@ -6,10 +6,8 @@ using namespace std;
 
 void Grid::checkRows(){
   int clearCount = 0;
-  cerr << "about to check rows" << endl;
   for(int rowIndex = gridHeight-1; rowIndex >= 0; rowIndex--){
     bool allFilled = true;
-    cerr << "checking row "<< rowIndex << endl;
     for(int colIndex = 0; colIndex < gridWidth; colIndex++){
       if(theGrid[rowIndex][colIndex].getBlock() == nullptr){
         allFilled = false;
@@ -22,9 +20,11 @@ void Grid::checkRows(){
       clearCount++;
     }
   }
-  int scoreToAdd = currentLevel + clearCount;
-  scoreToAdd *= scoreToAdd;
-  scoreKeeper->addScore(scoreToAdd);
+  if(clearCount != 0){
+    int scoreToAdd = currentLevel + clearCount;
+    scoreToAdd *= scoreToAdd;
+    scoreKeeper->addScore(scoreToAdd);
+  }
 }
 
 void Grid::clearRow(int row){
@@ -69,108 +69,133 @@ void Grid::hint(){
 }
 
 void Grid::reset(){
-  for(int rowIndex = 0; rowIndex < 11; rowIndex++){
-    for(int colIndex = 0; colIndex < gridHeight; colIndex++){
+  for(int rowIndex = 0; rowIndex < gridHeight; rowIndex++){
+    for(int colIndex = 0; colIndex < gridWidth; colIndex++){
       theGrid[rowIndex][colIndex].clearCell();
     }
   }
 }
 
 void Grid::left(std::shared_ptr<AbstractBlock> block, int multiplicity){
-  for(int i = 0; i < multiplicity; i++){
-    Coordinates c1 = block->get1stCell();
-    Coordinates c2 = block->get2ndCell();
-    Coordinates c3 = block->get3rdCell();
-    Coordinates c4 = block->get4thCell();
-    
-    if(c1.col > 0 && c2.col > 0
-       && c3.col > 0 && c4.col > 0){
-      if(theGrid[c1.row][c1.col - 1].canAddBlock(block)
-         && theGrid[c2.row][c2.col - 1].canAddBlock(block)
-         && theGrid[c3.row][c3.col - 1].canAddBlock(block)
-         && theGrid[c4.row][c4.col - 1].canAddBlock(block)){
-        theGrid[c1.row][c1.col].clearCell();
-        theGrid[c2.row][c2.col].clearCell();
-        theGrid[c3.row][c3.col].clearCell();
-        theGrid[c4.row][c4.col].clearCell();
-        theGrid[c1.row][c1.col - 1].setBlock(block);
-        theGrid[c2.row][c2.col - 1].setBlock(block);
-        theGrid[c3.row][c3.col - 1].setBlock(block);
-        theGrid[c4.row][c4.col - 1].setBlock(block);
-        block->setCol(block->getCol() - 1);
-      }
-    }
+  Coordinates c1 = block->get1stCell();
+  Coordinates c2 = block->get2ndCell();
+  Coordinates c3 = block->get3rdCell();
+  Coordinates c4 = block->get4thCell();
+  theGrid[c1.row][c1.col].clearCell();
+  theGrid[c2.row][c2.col].clearCell();
+  theGrid[c3.row][c3.col].clearCell();
+  theGrid[c4.row][c4.col].clearCell();
+  int i = 0;
+  while(i < multiplicity && c1.col > 0 && c2.col > 0
+        && c3.col > 0 && c4.col > 0
+        && theGrid[c1.row][c1.col - 1].canAddBlock(block)
+        && theGrid[c2.row][c2.col - 1].canAddBlock(block)
+        && theGrid[c3.row][c3.col - 1].canAddBlock(block)
+        && theGrid[c4.row][c4.col - 1].canAddBlock(block)){
+    block->setCol(block->getCol() - 1);
+    c1 = block->get1stCell();
+    c2 = block->get2ndCell();
+    c3 = block->get3rdCell();
+    c4 = block->get4thCell();
+    i++;
   }
+  theGrid[c1.row][c1.col].setBlock(block);
+  theGrid[c2.row][c2.col].setBlock(block);
+  theGrid[c3.row][c3.col].setBlock(block);
+  theGrid[c4.row][c4.col].setBlock(block);
+  
   if(block->getLevel() >= 3){
     down(block, 1);
   }
 }
 
 void Grid::right(std::shared_ptr<AbstractBlock> block, int multiplicity){
-  for(int i = 0; i < multiplicity; i++){
-    Coordinates c1 = block->get1stCell();
-    Coordinates c2 = block->get2ndCell();
-    Coordinates c3 = block->get3rdCell();
-    Coordinates c4 = block->get4thCell();
-    
-    if(c1.col < 10 && c2.col < 10
-       && c3.col < 10 && c4.col < 10){
-      if(theGrid[c1.row][c1.col + 1].canAddBlock(block)
-         && theGrid[c2.row][c2.col + 1].canAddBlock(block)
-         && theGrid[c3.row][c3.col + 1].canAddBlock(block)
-         && theGrid[c4.row][c4.col + 1].canAddBlock(block)){
-        theGrid[c1.row][c1.col].clearCell();
-        theGrid[c2.row][c2.col].clearCell();
-        theGrid[c3.row][c3.col].clearCell();
-        theGrid[c4.row][c4.col].clearCell();
-        theGrid[c1.row][c1.col + 1].setBlock(block);
-        theGrid[c2.row][c2.col + 1].setBlock(block);
-        theGrid[c3.row][c3.col + 1].setBlock(block);
-        theGrid[c4.row][c4.col + 1].setBlock(block);
-        block->setCol(block->getCol() + 1);
-      }
-    }
+  Coordinates c1 = block->get1stCell();
+  Coordinates c2 = block->get2ndCell();
+  Coordinates c3 = block->get3rdCell();
+  Coordinates c4 = block->get4thCell();
+  theGrid[c1.row][c1.col].clearCell();
+  theGrid[c2.row][c2.col].clearCell();
+  theGrid[c3.row][c3.col].clearCell();
+  theGrid[c4.row][c4.col].clearCell();
+  int i = 0;
+  while(i < multiplicity && c1.col < 10 && c2.col < 10
+        && c3.col < 10 && c4.col < 10
+        && theGrid[c1.row][c1.col + 1].canAddBlock(block)
+        && theGrid[c2.row][c2.col + 1].canAddBlock(block)
+        && theGrid[c3.row][c3.col + 1].canAddBlock(block)
+        && theGrid[c4.row][c4.col + 1].canAddBlock(block)){
+    block->setCol(block->getCol() + 1);
+    c1 = block->get1stCell();
+    c2 = block->get2ndCell();
+    c3 = block->get3rdCell();
+    c4 = block->get4thCell();
+    i++;
   }
+  theGrid[c1.row][c1.col].setBlock(block);
+  theGrid[c2.row][c2.col].setBlock(block);
+  theGrid[c3.row][c3.col].setBlock(block);
+  theGrid[c4.row][c4.col].setBlock(block);
+  
   if(block->getLevel() >= 3){
     down(block, 1);
   }
 }
 
 void Grid::down(std::shared_ptr<AbstractBlock> block, int multiplicity){
-  for(int i = 0; i < multiplicity; i++){
-    Coordinates c1 = block->get1stCell();
-    Coordinates c2 = block->get2ndCell();
-    Coordinates c3 = block->get3rdCell();
-    Coordinates c4 = block->get4thCell();
-    
-    if(c1.row < gridHeight - 1 && c2.row < gridHeight - 1
-       && c3.row < gridHeight - 1 && c4.row < gridHeight - 1){
-      if(theGrid[c1.row + 1][c1.col].canAddBlock(block)
-         && theGrid[c2.row + 1][c2.col].canAddBlock(block)
-         && theGrid[c3.row + 1][c3.col].canAddBlock(block)
-         && theGrid[c4.row + 1][c4.col].canAddBlock(block)){
-        theGrid[c1.row][c1.col].clearCell();
-        theGrid[c2.row][c2.col].clearCell();
-        theGrid[c3.row][c3.col].clearCell();
-        theGrid[c4.row][c4.col].clearCell();
-        theGrid[c1.row + 1][c1.col].setBlock(block);
-        theGrid[c2.row + 1][c2.col].setBlock(block);
-        theGrid[c3.row + 1][c3.col].setBlock(block);
-        theGrid[c4.row + 1][c4.col].setBlock(block);
-        block->setRow(block->getRow() + 1);
-      }
-    }
+  Coordinates c1 = block->get1stCell();
+  Coordinates c2 = block->get2ndCell();
+  Coordinates c3 = block->get3rdCell();
+  Coordinates c4 = block->get4thCell();
+  theGrid[c1.row][c1.col].clearCell();
+  theGrid[c2.row][c2.col].clearCell();
+  theGrid[c3.row][c3.col].clearCell();
+  theGrid[c4.row][c4.col].clearCell();
+  int i = 0;
+  while(i < multiplicity && c1.row < gridHeight - 1 && c2.row < gridHeight - 1
+        && c3.row < gridHeight - 1 && c4.row < gridHeight - 1
+        &&theGrid[c1.row + 1][c1.col].canAddBlock(block)
+        && theGrid[c2.row + 1][c2.col].canAddBlock(block)
+        && theGrid[c3.row + 1][c3.col].canAddBlock(block)
+        && theGrid[c4.row + 1][c4.col].canAddBlock(block)){
+    block->setRow(block->getRow() + 1);
+    c1 = block->get1stCell();
+    c2 = block->get2ndCell();
+    c3 = block->get3rdCell();
+    c4 = block->get4thCell();
+    i++;
   }
+  theGrid[c1.row][c1.col].setBlock(block);
+  theGrid[c2.row][c2.col].setBlock(block);
+  theGrid[c3.row][c3.col].setBlock(block);
+  theGrid[c4.row ][c4.col].setBlock(block);
 }
 
 void Grid::drop(std::shared_ptr<AbstractBlock> block){
-  int prevRow = 0;
-  int newRow = 1;
-  while(prevRow < newRow){
-    prevRow = block->getRow();
-    down(block, 1);
-    newRow = block->getRow();
+  Coordinates c1 = block->get1stCell();
+  Coordinates c2 = block->get2ndCell();
+  Coordinates c3 = block->get3rdCell();
+  Coordinates c4 = block->get4thCell();
+  theGrid[c1.row][c1.col].clearCell();
+  theGrid[c2.row][c2.col].clearCell();
+  theGrid[c3.row][c3.col].clearCell();
+  theGrid[c4.row][c4.col].clearCell();
+  while(c1.row < gridHeight - 1 && c2.row < gridHeight - 1
+        && c3.row < gridHeight - 1 && c4.row < gridHeight - 1
+        && theGrid[c1.row + 1][c1.col].canAddBlock(block)
+        && theGrid[c2.row + 1][c2.col].canAddBlock(block)
+        && theGrid[c3.row + 1][c3.col].canAddBlock(block)
+        && theGrid[c4.row + 1][c4.col].canAddBlock(block)){
+    block->setRow(block->getRow() + 1);
+    c1 = block->get1stCell();
+    c2 = block->get2ndCell();
+    c3 = block->get3rdCell();
+    c4 = block->get4thCell();
   }
+  theGrid[c1.row][c1.col].setBlock(block);
+  theGrid[c2.row][c2.col].setBlock(block);
+  theGrid[c3.row][c3.col].setBlock(block);
+  theGrid[c4.row][c4.col].setBlock(block);
   checkRows();
 }
 

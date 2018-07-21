@@ -18,7 +18,7 @@ void TextDisplay::setLevel(int newLevel){
 
 ostream &operator<<(ostream &out, const TextDisplay &td){
   out << "Level: " << td.currentLevel << endl;
-  out << "Score: " << td.scoreKeeper->getScore() << endl;
+  out << "Score: " << td.scoreKeeper->getScore(false) << endl;
   out << "Hi-Score: " << td.scoreKeeper->getHighScore() << endl;
   for(int rowIndex = 3; rowIndex < td.gridHeight; rowIndex++){ // ****** "rowIndex undefined"
     for(int columnIndex = 0; columnIndex < td.gridWidth; columnIndex++){ // ******** "columnIndex undefined"

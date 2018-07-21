@@ -10,7 +10,7 @@
 
 using namespace std;
 
-Level4::Level4(std::string seqFile, int seed): AbstractLevel{false, seqFile, seed}{}
+Level4::Level4(std::string seqFile, int seed): AbstractLevel{true, seqFile, seed}{}
 
 void Level4::setRandom(bool r){
   random = r;

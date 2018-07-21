@@ -8,7 +8,7 @@ GraphicsDisplay::GraphicsDisplay(int currentLevel, std::shared_ptr<ScoreKeeper> 
 currentLevel{currentLevel}, scoreKeeper{scoreKeeper}, theDisplay{500,800}{
   theDisplay.fillRectangle(0,0,dispWidth,dispHeight,Xwindow::White);
   string levelString = "Level: " + to_string(currentLevel);
-  string scoreString = "Score: " + to_string(scoreKeeper->getScore());
+  string scoreString = "Score: " + to_string(scoreKeeper->getScore(true));
   string highScoreString = "Hi-Score: " + to_string(scoreKeeper->getHighScore());
   theDisplay.drawString(20, 20, levelString);
   theDisplay.drawString(20, 40, scoreString);
@@ -24,9 +24,13 @@ void GraphicsDisplay::notify(Subject &whoNotified){
   int col = myInfo.col;
   
   //Reprint scores/level if they change find a better way 2 do this
-  string levelString = "Level: " + to_string(currentLevel);
-  string scoreString = "Score: " + to_string(scoreKeeper->getScore());
-  string highScoreString = "Hi-Score: " + to_string(scoreKeeper->getHighScore());
+  if(scoreKeeper->getHasChanged()){
+    string scoreString = "Score: " + to_string(scoreKeeper->getScore(true));
+    string highScoreString = "Hi-Score: " + to_string(scoreKeeper->getHighScore());
+    theDisplay.fillRectangle(20,30,480,40,Xwindow::White);
+    theDisplay.drawString(20, 40, scoreString);
+    theDisplay.drawString(20, 60, highScoreString);
+  }
   
   char shape = myInfo.blockType;
   int color;
@@ -65,4 +69,7 @@ void GraphicsDisplay::notify(Subject &whoNotified){
 
 void GraphicsDisplay::setLevel(int newLevel){
   currentLevel = newLevel;
+  string levelString = "Level: " + to_string(currentLevel);
+  theDisplay.fillRectangle(20,10,480,20,Xwindow::White);
+  theDisplay.drawString(20, 20, levelString);
 }

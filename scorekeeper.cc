@@ -2,7 +2,10 @@
 
 ScoreKeeper::ScoreKeeper(int score, int highScore): score{score}, highScore{highScore}{}
 
-int ScoreKeeper::getScore() const {
+int ScoreKeeper::getScore(bool viewed) {
+  if(viewed){
+    hasChanged = false;
+  }
   return score;
 }
 
@@ -15,8 +18,14 @@ void ScoreKeeper::addScore(int amount) {
   if(score > highScore){
     highScore = score;
   }
+  hasChanged = true;
 }
 
 void ScoreKeeper::resetScore() {
   score = 0;
+  hasChanged = true;
+}
+
+bool ScoreKeeper::getHasChanged() const{
+  return hasChanged;
 }

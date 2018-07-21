@@ -41,6 +41,7 @@ myInterpreter{make_unique<CommandInterpreter>()}, scoreKeeper{make_shared<ScoreK
 }
 
 void Quadris::Start(){
+  bool gameOver = false;
   currentBlock = currentLevel->createBlock();
   theGrid->newBlock(currentBlock);
   
@@ -52,7 +53,10 @@ void Quadris::Start(){
     int multiplier;
     aCommand = myInterpreter->interpretCommand(aCommand, multiplier);
     
-    if(aCommand == "left"){
+    if(gameOver && aCommand != "restart"){
+      cerr << "The Game is over. You must enter restart to play again." << endl;
+    }
+    else if(aCommand == "left"){
       theGrid->left(currentBlock, multiplier);
     }
     else if(aCommand == "right"){
@@ -71,16 +75,20 @@ void Quadris::Start(){
       for(int i = 0; i < multiplier; i++){
         theGrid->drop(currentBlock);
         currentBlock = currentLevel->createBlock(); // ****** "AbstractLevel has no createBlock()"
-        theGrid->newBlock(currentBlock);
+        if(!theGrid->newBlock(currentBlock)){
+          gameOver = true;
+        }
       }
     }
     else if(aCommand == "levelup"){
       int curr = currentLevel->getLevel();
       setLevel(curr+1);
+      theGrid->setLevel(currentLevel->getLevel());
     }
     else if(aCommand == "leveldown"){
       int curr = currentLevel->getLevel();
       setLevel(curr-1);
+      theGrid->setLevel(currentLevel->getLevel());
     }
     else if(aCommand == "norandom"){
       string newFile;
@@ -127,6 +135,9 @@ void Quadris::Start(){
     }
     else if(aCommand == "noCommand"){
       cerr << "INVALID COMMAND" << endl;
+    }
+    if(gameOver){
+      cout << "Game Over. Enter restart to play again" << endl;
     }
     cout << *theGrid;
   }
