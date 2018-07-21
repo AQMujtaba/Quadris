@@ -13,6 +13,8 @@ class AbstractBlock{
   bool placed;
   int col, row; // lower left cell needed for rotation
   int orientation; // 0 = N, 1 = E, 2 = S, 3 = W
+ protected:
+  bool hint;
  public:
   AbstractBlock(int level, int col, int row, 
     std::shared_ptr<ScoreKeeper> score);
@@ -20,6 +22,7 @@ class AbstractBlock{
   int getOrientation() const;
   void setOrientation(int newOrientation);
   void togglePlaced(); // toggle placement off
+  void toggleHint(); // toggle hint between on and off
   int getLevel();
   int getRow() const;
   int getCol() const;

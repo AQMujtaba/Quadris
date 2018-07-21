@@ -10,7 +10,11 @@ std::shared_ptr<ScoreKeeper> score) :
 	AbstractBlock{ level, col, row, score } {}
 
 char SBlock::getShape() const {
-	return 'S';
+	if (hint) {
+		return "?"
+	} else {
+		return "S";
+	}
 }
 
 Coordinates SBlock::get1stCell(int newOrientation) {

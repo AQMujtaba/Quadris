@@ -14,23 +14,26 @@ int main(int args, char *argv[]) {
   	string arg = argv[i];
   	if (arg == "-text") {
   		textOnly = true;
-  	} else if (arg == "-seed") {
+  	} 
+  	else if (arg == "-seed") {
   		stringstream in(argv[i + 1]);
   		if (!(in >> seed)) { // check for successful read
-  			seed = 1; // back to default
+  			seed = 1; // back to default if not
   		}
-  	} else if (arg == "-scriptfile") {
+  	} 
+  	else if (arg == "-scriptfile") {
   		fileName = argv[i + 1];
-  	} else if (arg == "-startlevel") {
+  	} 
+  	else if (arg == "-startlevel") {
   		stringstream in(argv[i + 1]);
   		if (!(in >> level)) { // check for successful read
-  			level = 0; // back to default
+  			level = 0; // back to default if not
   		}
   	}
   }
 
   ifstream file(fileName);
-  if (!(file.good())) { // check if file exists/readable
+  if ((!(file.good())) && (level == 0)) { // check if file exists/readable
   	cerr << "Please provide a readable file." << endl;
   	return 1;
   }

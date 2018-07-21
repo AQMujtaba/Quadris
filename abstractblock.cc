@@ -11,6 +11,7 @@ AbstractBlock::AbstractBlock(int level, int col, int row,
 	level{ level }, score{ score }, col{ col }, row{ row } {
 	orientation = 0;
 	placed = true;
+	hint = false;
 }
 
 AbstractBlock::~AbstractBlock() {
@@ -30,6 +31,14 @@ void AbstractBlock::setOrientation(int newOrientation) {
 
 void AbstractBlock::togglePlaced() {
 	placed = false;
+}
+
+void AbstractBlock::toggleHint() {
+	if (hint) {
+		hint = false;
+	} else {
+		hint = true;
+	}
 }
 
 int AbstractBlock::getLevel() {
