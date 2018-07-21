@@ -1,6 +1,7 @@
 #include "quadris.h"
 #include <string>
 #include <sstream>
+#include <fstream>
 
 using namespace std;
 
@@ -38,8 +39,8 @@ int main(int args, char *argv[]) {
   	return 1;
   }
 
-  Quadris myGame{textOnly, seed, file, level};
-  
+  Quadris myGame{textOnly, seed, fileName, level};
+
   try {
   	myGame.Start();
   }
