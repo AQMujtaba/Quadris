@@ -21,7 +21,7 @@ class Grid{
   std::shared_ptr<TextDisplay> td;
   std::shared_ptr<GraphicsDisplay> gd;
   std::shared_ptr<ScoreKeeper> scoreKeeper;
-  
+  std::shared_ptr<AbstractBlock> hintBlock;
   void checkRows();
   void clearRow(int row);
   void shiftRowsDown(int startRow);
