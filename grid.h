@@ -28,7 +28,7 @@ class Grid{
   void dropSingleBlock();
  public:
   Grid(bool textOnly, int currentLevel, std::shared_ptr<ScoreKeeper> scoreKeeper);
-  void hint();
+  void hint(std::shared_ptr<AbstractBlock> block);
   void reset();
   void left(std::shared_ptr<AbstractBlock> block, int multiplicity);
   void right(std::shared_ptr<AbstractBlock> block, int multiplicity);
