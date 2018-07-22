@@ -7,7 +7,6 @@ AbstractLevel::AbstractLevel(bool random, string seqFile, int seed):  seqFile{se
   ifstream ifs{seqFile};
   char block;
   while(ifs >> skipws >> block){
-    cerr << "Reading " << block << " into Sequence" << endl;
     blockSeq.push_back(block);
   }
 }

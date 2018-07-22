@@ -83,14 +83,18 @@ void Quadris::Start(){
       }
     }
     else if(aCommand == "levelup"){
-      int curr = currentLevel->getLevel();
-      setLevel(curr + 1);
-      theGrid->setLevel(currentLevel->getLevel());
+      for(int i = 0; i < multiplier; i++){
+        int curr = currentLevel->getLevel();
+        setLevel(curr + 1);
+        theGrid->setLevel(currentLevel->getLevel());
+      }
     }
     else if(aCommand == "leveldown"){
-      int curr = currentLevel->getLevel();
-      setLevel(curr - 1);
-      theGrid->setLevel(currentLevel->getLevel());
+      for(int i = 0; i < multiplier; i++){
+        int curr = currentLevel->getLevel();
+        setLevel(curr - 1);
+        theGrid->setLevel(currentLevel->getLevel());
+      }
     }
     else if(aCommand == "norandom"){
       string newFile;
@@ -129,6 +133,7 @@ void Quadris::Start(){
       currentBlock = newBlock;
     }
     else if(aCommand == "restart"){
+      gameOver = false;
       scoreKeeper->resetScore();
       theGrid->reset();
       currentBlock = currentLevel->createBlock();

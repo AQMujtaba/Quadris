@@ -22,6 +22,7 @@ void Grid::checkRows(){
     }
   }
   if(clearCount != 0){
+    blocksSinceClear = 0;
     int scoreToAdd = currentLevel + clearCount;
     scoreToAdd *= scoreToAdd;
     scoreKeeper->addScore(scoreToAdd);
@@ -52,13 +53,13 @@ void Grid::dropSingleBlock(){
   newBlock = make_shared<SingleBlock>(0,0,0, scoreKeeper);
   newBlock->togglePlaced();
   int rowIndex = gridHeight-1;
-  while(rowIndex >= 0 && theGrid[rowIndex][5].canAddBlock(newBlock)){
-    rowIndex++;
+  while(rowIndex >= 0 && !theGrid[rowIndex][5].canAddBlock(newBlock)){
+    rowIndex--;
   }
   theGrid[rowIndex][5].setBlock(newBlock);
 }
 
-Grid::Grid(bool textOnly, int currentLevel, std::shared_ptr<ScoreKeeper> scoreKeeper): textOnly{textOnly}, currentLevel{currentLevel}, td{make_shared<TextDisplay>(currentLevel, scoreKeeper)}, gd{textOnly ? nullptr : make_shared<GraphicsDisplay>(currentLevel, scoreKeeper)}, scoreKeeper{scoreKeeper}{
+Grid::Grid(bool textOnly, int currentLevel, std::shared_ptr<ScoreKeeper> scoreKeeper): textOnly{textOnly}, currentLevel{currentLevel}, blocksSinceClear{0}, td{make_shared<TextDisplay>(currentLevel, scoreKeeper)}, gd{textOnly ? nullptr : make_shared<GraphicsDisplay>(currentLevel, scoreKeeper)}, scoreKeeper{scoreKeeper}{
   for(int rowIndex = 0; rowIndex < gridHeight; rowIndex++){
     vector<Cell> rowVec;
     for(int colIndex = 0; colIndex < gridWidth; colIndex++){
