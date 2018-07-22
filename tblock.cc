@@ -17,6 +17,12 @@ char TBlock::getShape() const {
 	}
 }
 
+shared_ptr<AbstractBlock> TBlock::createHint() const {
+	shared_ptr<AbstractBlock> block = make_shared<TBlock>(level, col, row, score);
+	block->toggleHint();
+	return block;
+}
+
 Coordinates TBlock::get1stCell(int newOrientation) {
 	int col = getCol();
 	int row = getRow();

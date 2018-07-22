@@ -141,13 +141,13 @@ void Quadris::Start(){
       theGrid->newBlock(currentBlock);
     }
     else if(aCommand == "hint"){
-      theGrid->hint();
+      theGrid->hint(currentBlock);
     }
     else if(aCommand == "noCommand"){
       cerr << "INVALID COMMAND" << endl;
     }
     if(gameOver){
-      cout << "Game Over. Enter restart to play again" << endl;
+      cout << "Game Over. Enter restart to play again." << endl;
     }
     cout << *theGrid;
   }

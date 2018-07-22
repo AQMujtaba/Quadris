@@ -22,7 +22,7 @@ class AbstractBlock{
   int getOrientation() const;
   void setOrientation(int newOrientation);
   void togglePlaced(); // toggle placement off
-  void toggleHint(); // toggle hint between on and off
+  void toggleHint(); // toggle hint on
   int getLevel();
   int getRow() const;
   int getCol() const;
@@ -32,6 +32,7 @@ class AbstractBlock{
   bool isHeavy() const; // true for levels 3+
   Coordinates getReference() const;
   virtual char getShape() const = 0;
+  virtual std::shared_ptr<AbstractBlock> setHint() = 0; // create a hint block
   virtual Coordinates get1stCell() = 0;
   virtual Coordinates get2ndCell() = 0;
   virtual Coordinates get3rdCell() = 0;

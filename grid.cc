@@ -73,8 +73,16 @@ Grid::Grid(bool textOnly, int currentLevel, std::shared_ptr<ScoreKeeper> scoreKe
   }
 }
 
-void Grid::hint(){
+void Grid::hint(std::shared_ptr<AbstractBlock> block){
+  // create a copy of the block, with "hint settings" activated
+  shared_ptr<AbstractBlock> hintBlock = block->createHint(); 
+  int currRow = hintBlock->getRow(); // get starting row point
+  int currCol = hintBlock->getCol(); // get starting col point
+  int lowest = 0;
+
+
   
+  return block;
 }
 
 void Grid::reset(){

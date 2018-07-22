@@ -24,6 +24,7 @@ AbstractBlock::~AbstractBlock() {
 int AbstractBlock::getOrientation() const {
 	return orientation;
 }
+
 void AbstractBlock::setOrientation(int newOrientation) {
 	orientation = ((newOrientation % 4 + 4) % 4); // math equivalent to 
 												  // newOrientation % 4
@@ -34,11 +35,8 @@ void AbstractBlock::togglePlaced() {
 }
 
 void AbstractBlock::toggleHint() {
-	if (hint) {
-		hint = false;
-	} else {
-		hint = true;
-	}
+	hint = true;
+	placed = false;
 }
 
 int AbstractBlock::getLevel() {

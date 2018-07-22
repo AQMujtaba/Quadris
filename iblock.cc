@@ -17,6 +17,12 @@ char IBlock::getShape() const {
 	}
 }
 
+shared_ptr<AbstractBlock> IBlock::createHint() const {
+	shared_ptr<AbstractBlock> block = make_shared<IBlock>(level, col, row, score);
+	block->toggleHint();
+	return block;
+}
+
 Coordinates IBlock::get1stCell(int newOrientation) {
 	int col = getCol();
 	int row = getRow();
