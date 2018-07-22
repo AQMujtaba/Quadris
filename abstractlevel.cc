@@ -4,8 +4,7 @@
 using namespace std;
 
 AbstractLevel::AbstractLevel(bool random, string seqFile, int seed):  seqFile{seqFile},seed{seed}, random{random}, seqPos{0}{
-  ifstream ifs;
-  ifs.open(seqFile);
+  ifstream ifs{seqFile};
   char block;
   while(ifs >> skipws >> block){
     blockSeq.push_back(block);

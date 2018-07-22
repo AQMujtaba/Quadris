@@ -11,9 +11,9 @@ std::shared_ptr<ScoreKeeper> score) :
 
 char OBlock::getShape() const {
 	if (hint) {
-		return "?"
+    return '?';
 	} else {
-		return "O";
+		return 'O';
 	}
 }
 

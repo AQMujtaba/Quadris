@@ -11,9 +11,9 @@ std::shared_ptr<ScoreKeeper> score) :
 
 char IBlock::getShape() const {
 	if (hint) {
-		return "?"
+    return '?';
 	} else {
-		return "I";
+		return 'I';
 	}
 }
 

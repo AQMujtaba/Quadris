@@ -51,7 +51,7 @@ shared_ptr<AbstractBlock> Level2::createBlock(){
     seqPos++;
   }
   else{
-    if(seqPos != (int)(blockSeq.size()-1)){
+    if(seqPos < (int)(blockSeq.size())){
       char block = blockSeq[seqPos];
       if(block == 'I') {
         return make_shared<IBlock>(2, 0, 0, nullptr);
