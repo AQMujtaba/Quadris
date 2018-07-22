@@ -24,31 +24,31 @@ int Level0::getLevel(){
 shared_ptr<AbstractBlock> Level0::createBlock(){
   if(seqPos < (int)(blockSeq.size())){
     char block = blockSeq[seqPos];
+    seqPos++;
     if(block == 'I') {
-    return make_shared<IBlock>(0, 0, 0, nullptr);
+      return make_shared<IBlock>(0, 0, 0, nullptr);
     }
     else if(block == 'J') {
-    return make_shared<JBlock>(0, 0, 0, nullptr);
+      return make_shared<JBlock>(0, 0, 0, nullptr);
     }
     else if(block == 'L') {
-    return make_shared<LBlock>(0, 0, 0, nullptr);
+      return make_shared<LBlock>(0, 0, 0, nullptr);
     }
     else if(block == 'O') {
-    return make_shared<OBlock>(0, 0, 0, nullptr);
+      return make_shared<OBlock>(0, 0, 0, nullptr);
     }
     else if(block == 'S') {
-    return make_shared<SBlock>(0, 0, 0, nullptr);
+      return make_shared<SBlock>(0, 0, 0, nullptr);
     }
     else if(block == 'T') {
-    return make_shared<TBlock>(0, 0, 0, nullptr);
+      return make_shared<TBlock>(0, 0, 0, nullptr);
     }
     else if(block == 'Z') {
-    return make_shared<ZBlock>(0, 0, 0, nullptr);
+      return make_shared<ZBlock>(0, 0, 0, nullptr);
     }
     else{
       
     }
-    seqPos++;
   }
   else{
     seqPos = 0;

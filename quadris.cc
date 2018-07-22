@@ -28,7 +28,7 @@ void Quadris::setLevel(int level){
     currentLevel = make_shared<Level3>(seqFile, seed);
   }
   else{
-    currentLevel = make_shared<Level0>(seqFile, seed);
+    currentLevel = make_shared<Level4>(seqFile, seed);
   }
 }
 
@@ -84,17 +84,13 @@ void Quadris::Start(){
     }
     else if(aCommand == "levelup"){
       int curr = currentLevel->getLevel();
-      if (curr + 1 <= 4) { // check if between levels 0 - 4
-        setLevel(curr + 1);
-        theGrid->setLevel(currentLevel->getLevel());
-      }
+      setLevel(curr + 1);
+      theGrid->setLevel(currentLevel->getLevel());
     }
     else if(aCommand == "leveldown"){
       int curr = currentLevel->getLevel();
-      if (curr - 1 >= 0) { // check if between levels 0 - 4
-        setLevel(curr - 1);
-        theGrid->setLevel(currentLevel->getLevel());
-      }
+      setLevel(curr - 1);
+      theGrid->setLevel(currentLevel->getLevel());
     }
     else if(aCommand == "norandom"){
       string newFile;

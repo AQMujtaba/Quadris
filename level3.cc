@@ -48,11 +48,11 @@ shared_ptr<AbstractBlock> Level3::createBlock(){
     else if(n == 8) {
       return make_shared<TBlock>(3, 0, 0, nullptr);
     }
-  seqPos++;
   }
   else{
     if(seqPos < (int)(blockSeq.size())){
       char block = blockSeq[seqPos];
+      seqPos++;
       if(block == 'I') {
         return make_shared<IBlock>(3, 0, 0, nullptr);
       }
