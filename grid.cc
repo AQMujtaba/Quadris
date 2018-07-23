@@ -93,89 +93,122 @@ void Grid::hint(std::shared_ptr<AbstractBlock> block){
   int currCol = hintBlock->getCol(); // get starting col point
   int lowest = 0;
 
-  for (int col = 0; col < gridWidth; ++col) { // from left to right on currRow
+  for (int orientation = 0; orientation <= 3; ++orientation) {
     shared_ptr<AbstractBlock> tempHintBlock = block->createHint();
-    tempHintBlock->setCol(col);     // consider the block from
-    tempHintBlock->setRow(currRow); // current location 
-    drop(tempHintBlock);
-    if (lowest < tempHintBlock->getRow) { // check how low block dropped
-      lowest = tempHintBlock->getRow;
-      hintBlock = tempHintBlock;
-    } else { // clear cells to counteract drop function
-      Coordinates c1 = tempHintBlock->get1stCell();
-      Coordinates c2 = tempHintBlock->get2ndCell();
-      Coordinates c3 = tempHintBlock->get3rdCell();
-      Coordinates c4 = tempHintBlock->get4thCell();
-      theGrid[c1.row][c1.col].clearCell(false);
-      theGrid[c2.row][c2.col].clearCell(false);
-      theGrid[c3.row][c3.col].clearCell(false);
-      theGrid[c4.row][c4.col].clearCell(false);
-    }
+    tempHintBlock->setOrientation(getOrientation() + orientation);
+    int leftBarrier = currCol; // starting point before searching left side
+    int rightBarrier = currCol; // starting point before searching right side
+
+    Coordinates c1 = tempHintBlock->get1stCell();
+    Coordinates c2 = tempHintBlock->get2ndCell();
+    Coordinates c3 = tempHintBlock->get3rdCell();
+    Coordinates c4 = tempHintBlock->get4thCell();
+
+    // only check if orientation change is valid 
+    if(c1.col < gridWidth && c2.col < gridWidth 
+       && c3.col < gridWidth && c4.col < gridWidth){
+      if(theGrid[c1.row][c1.col].canAddBlock(block)
+         && theGrid[c2.row][c2.col].canAddBlock(block)
+         && theGrid[c3.row][c3.col].canAddBlock(block)
+         && theGrid[c4.row][c4.col].canAddBlock(block)){
+
+        while(c1.col > 0 && c2.col > 0 // how far left without obstruction
+            && c3.col > 0 && c4.col > 0
+            && theGrid[c1.row][c1.col - 1].canAddBlock(block)
+            && theGrid[c2.row][c2.col - 1].canAddBlock(block)
+            && theGrid[c3.row][c3.col - 1].canAddBlock(block)
+            && theGrid[c4.row][c4.col - 1].canAddBlock(block)){
+          tempHintBlock->setCol(tempHintBlock->getCol() - 1);
+          c1 = tempHintBlock->get1stCell();
+          c2 = tempHintBlock->get2ndCell();
+          c3 = tempHintBlock->get3rdCell();
+          c4 = tempHintBlock->get4thCell();
+          --leftBarrier;
+        }
+
+        tempHintBlock->setCol(currCol); // reset reference 
+        tempHintBlock->setRow(currRow); // point 
+
+        while(c1.col < 10 && c2.col < 10 // how far right without obstruction
+            && c3.col < 10 && c4.col < 10
+            && theGrid[c1.row][c1.col + 1].canAddBlock(block)
+            && theGrid[c2.row][c2.col + 1].canAddBlock(block)
+            && theGrid[c3.row][c3.col + 1].canAddBlock(block)
+            && theGrid[c4.row][c4.col + 1].canAddBlock(block)){
+        tempHintBlock->setCol(tempHintBlock->getCol() + 1);
+        c1 = tempHintBlock->get1stCell();
+        c2 = tempHintBlock->get2ndCell();
+        c3 = tempHintBlock->get3rdCell();
+        c4 = tempHintBlock->get4thCell();
+        ++rightBarrier;
+        }
+
+        for (int col = currCol; col >= leftBarrier; --col) { // check max drop towards left
+          int drop = 0;
+          tempHintBlock->setCol(col);
+          tempHintBlock->setRow(currRow);
+
+          while(c1.row < gridHeight - 1 && c2.row < gridHeight - 1
+              && c3.row < gridHeight - 1 && c4.row < gridHeight - 1
+              && theGrid[c1.row + 1][c1.col].canAddBlock(block)
+              && theGrid[c2.row + 1][c2.col].canAddBlock(block)
+              && theGrid[c3.row + 1][c3.col].canAddBlock(block)
+              && theGrid[c4.row + 1][c4.col].canAddBlock(block)){
+            tempHintBlock->setRow(tempHintBlock->getRow() + 1);
+            c1 = tempHintBlock->get1stCell();
+            c2 = tempHintBlock->get2ndCell();
+            c3 = tempHintBlock->get3rdCell();
+            c4 = tempHintBlock->get4thCell();
+            ++drop;
+          }
+
+          if (lowest < drop) { // check how low block dropped
+            lowest = drop;
+            hintBlock->setCol(tempHintBlock->getCol());
+            hintBlock->setRow(tempHintBlock->getRow());
+          } 
+        } 
+
+        for (int col = currCol; col <= rightBarrier; ++col) { // check max drop towards right
+          int drop = 0;
+          tempHintBlock->setCol(col);
+          tempHintBlock->setRow(currRow);
+
+          while(c1.row < gridHeight - 1 && c2.row < gridHeight - 1
+              && c3.row < gridHeight - 1 && c4.row < gridHeight - 1
+              && theGrid[c1.row + 1][c1.col].canAddBlock(block)
+              && theGrid[c2.row + 1][c2.col].canAddBlock(block)
+              && theGrid[c3.row + 1][c3.col].canAddBlock(block)
+              && theGrid[c4.row + 1][c4.col].canAddBlock(block)){
+            tempHintBlock->setRow(tempHintBlock->getRow() + 1);
+            c1 = tempHintBlock->get1stCell();
+            c2 = tempHintBlock->get2ndCell();
+            c3 = tempHintBlock->get3rdCell();
+            c4 = tempHintBlock->get4thCell();
+            ++drop;
+          }
+
+          if (lowest < drop) { // check how low block dropped
+            lowest = drop;
+            hintBlock->setCol(tempHintBlock->getCol());
+            hintBlock->setRow(tempHintBlock->getRow());
+          } 
+        }
+      }
+    }   
   }
 
-  for (int col = 0; col < gridWidth; ++col) { // from left to right on currRow
-    shared_ptr<AbstractBlock> tempHintBlock = block->createHint();
-    clockwise(tempHintBlock, 1); // change orientation
-    tempHintBlock->setCol(col);     // consider the block from
-    tempHintBlock->setRow(currRow); // current location 
-    drop(tempHintBlock);
-    if (lowest < tempHintBlock->getRow) { // check how low block dropped
-      lowest = tempHintBlock->getRow;
-      hintBlock = tempHintBlock;
-    } else { // clear cells to counteract drop function
-      Coordinates c1 = tempHintBlock->get1stCell();
-      Coordinates c2 = tempHintBlock->get2ndCell();
-      Coordinates c3 = tempHintBlock->get3rdCell();
-      Coordinates c4 = tempHintBlock->get4thCell();
-      theGrid[c1.row][c1.col].clearCell(false);
-      theGrid[c2.row][c2.col].clearCell(false);
-      theGrid[c3.row][c3.col].clearCell(false);
-      theGrid[c4.row][c4.col].clearCell(false);
-    }
-  }
+  this->hintBlock = hintBlock; // set grid hintBlock to best hintBlock
 
-  for (int col = 0; col < gridWidth; ++col) { // from left to right on currRow
-    shared_ptr<AbstractBlock> tempHintBlock = block->createHint();
-    clockwise(tempHintBlock, 2); // change orientation
-    tempHintBlock->setCol(col);     // consider the block from
-    tempHintBlock->setRow(currRow); // current location 
-    drop(tempHintBlock);
-    if (lowest < tempHintBlock->getRow) { // check how low block dropped
-      lowest = tempHintBlock->getRow;
-      hintBlock = tempHintBlock;
-    } else { // clear cells to counteract drop function
-      Coordinates c1 = tempHintBlock->get1stCell();
-      Coordinates c2 = tempHintBlock->get2ndCell();
-      Coordinates c3 = tempHintBlock->get3rdCell();
-      Coordinates c4 = tempHintBlock->get4thCell();
-      theGrid[c1.row][c1.col].clearCell(false);
-      theGrid[c2.row][c2.col].clearCell(false);
-      theGrid[c3.row][c3.col].clearCell(false);
-      theGrid[c4.row][c4.col].clearCell(false);
-    }
-  }
+  c1 = hintBlock->get1stCell(); // get hintBlock's coordinates
+  c2 = hintBlock->get2ndCell();
+  c3 = hintBlock->get3rdCell();
+  c4 = hintBlock->get4thCell();
 
-  for (int col = 0; col < gridWidth; ++col) { // from left to right on currRow
-    shared_ptr<AbstractBlock> tempHintBlock = block->createHint();
-    clockwise(tempHintBlock, 3); // change orientation
-    tempHintBlock->setCol(col);     // consider the block from
-    tempHintBlock->setRow(currRow); // current location 
-    drop(tempHintBlock);
-    if (lowest < tempHintBlock->getRow) { // check how low block dropped
-      lowest = tempHintBlock->getRow;
-      hintBlock = tempHintBlock;
-    } else { // clear cells to counteract drop function
-      Coordinates c1 = tempHintBlock->get1stCell();
-      Coordinates c2 = tempHintBlock->get2ndCell();
-      Coordinates c3 = tempHintBlock->get3rdCell();
-      Coordinates c4 = tempHintBlock->get4thCell();
-      theGrid[c1.row][c1.col].clearCell(false);
-      theGrid[c2.row][c2.col].clearCell(false);
-      theGrid[c3.row][c3.col].clearCell(false);
-      theGrid[c4.row][c4.col].clearCell(false);
-    }
-  }
-  this->hintBlock = hintBlock;
+  theGrid[c1.row][c1.col].setBlock(hintBlock); // place hintBlock on grid
+  theGrid[c2.row][c2.col].setBlock(hintBlock);
+  theGrid[c3.row][c3.col].setBlock(hintBlock);
+  theGrid[c4.row][c4.col].setBlock(hintBlock);
 }
 
 void Grid::reset(){

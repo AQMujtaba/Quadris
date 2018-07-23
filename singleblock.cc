@@ -13,6 +13,12 @@ char SingleBlock::getShape() const {
 	return '*';
 }
 
+shared_ptr<AbstractBlock> SingleBlock::createHint() const {
+  shared_ptr<AbstractBlock> block = make_shared<SingleBlock>(level, col, row, score);
+  block->toggleHint();
+  return block;
+}
+
 Coordinates SingleBlock::get1stCell(){
   return Coordinates{getCol(), getRow()};
 }
