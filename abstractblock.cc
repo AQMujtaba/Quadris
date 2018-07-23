@@ -17,6 +17,8 @@ AbstractBlock::AbstractBlock(int level, int col, int row,
 AbstractBlock::~AbstractBlock() {
 	if (placed) {
 		int points = ((level + 1) * (level + 1));
+    if(!score){
+    }
 		score->addScore(points);
 	}
 } 
