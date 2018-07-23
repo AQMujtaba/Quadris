@@ -219,6 +219,11 @@ void Grid::reset(){
   }
 }
 
+void Grid::updateNextBlock(char type){
+  td->updateNextBlock(type);
+  gd->updateNextBlock(type);
+}
+
 void Grid::left(std::shared_ptr<AbstractBlock> block, int multiplicity){
   if (hintBlock) {
     clearHintBlock();
