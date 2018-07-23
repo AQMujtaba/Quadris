@@ -353,6 +353,9 @@ void Grid::clockwise(std::shared_ptr<AbstractBlock> block, int multiplicity){
       }
     }
   }
+  if(block->getLevel() >= 3){
+    down(block, 1);
+  }
 }
 
 void Grid::counterClockwise(std::shared_ptr<AbstractBlock> block, int multiplicity){
@@ -387,6 +390,9 @@ void Grid::counterClockwise(std::shared_ptr<AbstractBlock> block, int multiplici
       }
     }
   }
+  if(block->getLevel() >= 3){
+    down(block, 1);
+  }
 }
 
 bool Grid::newBlock(std::shared_ptr<AbstractBlock> block){
@@ -414,7 +420,10 @@ bool Grid::newBlock(std::shared_ptr<AbstractBlock> block){
     theGrid[c2.row][c2.col].setBlock(block);
     theGrid[c3.row][c3.col].setBlock(block);
     theGrid[c4.row][c4.col].setBlock(block);
-    blocksSinceClear++;
+    
+    if(block->getlevel() == 4){
+      blocksSinceClear++;
+    }
     return true;
   }
   return false;

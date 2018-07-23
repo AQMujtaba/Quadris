@@ -65,6 +65,9 @@ void Quadris::Start(){
     }
     else if(aCommand == "down"){
       theGrid->down(currentBlock, multiplier);
+      if(currentBlock->getLevel() >= 3){
+        theGrid->down(currentBlock,1);
+      }
     }
     else if(aCommand == "clockwise"){
       theGrid->clockwise(currentBlock, multiplier);
@@ -134,6 +137,7 @@ void Quadris::Start(){
     }
     else if(aCommand == "restart"){
       gameOver = false;
+      setLevel(currentLevel->getLevel());
       scoreKeeper->resetScore();
       theGrid->reset();
       currentBlock = currentLevel->createBlock();
