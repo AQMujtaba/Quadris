@@ -95,7 +95,7 @@ void Grid::hint(std::shared_ptr<AbstractBlock> block){
 
   for (int orientation = 0; orientation <= 3; ++orientation) {
     shared_ptr<AbstractBlock> tempHintBlock = block->createHint();
-    tempHintBlock->setOrientation(hintBlock->getOrientation() + orientation);
+    tempHintBlock->setOrientation(tempHintBlock->getOrientation() + orientation);
     int leftBarrier = currCol; // starting point before searching left side
     int rightBarrier = currCol; // starting point before searching right side
 
@@ -212,17 +212,11 @@ void Grid::hint(std::shared_ptr<AbstractBlock> block){
 }
 
 void Grid::reset(){
-  cerr << "Resetting The grid" << endl;
   for(int rowIndex = 0; rowIndex < gridHeight; rowIndex++){
     for(int colIndex = 0; colIndex < gridWidth; colIndex++){
       theGrid[rowIndex][colIndex].clearCell(false);
     }
   }
-}
-
-void Grid::updateNextBlock(char type){
-  td->updateNextBlock(type);
-  gd->updateNextBlock(type);
 }
 
 void Grid::left(std::shared_ptr<AbstractBlock> block, int multiplicity){
