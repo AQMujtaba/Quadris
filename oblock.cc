@@ -17,8 +17,9 @@ char OBlock::getShape() const {
 	}
 }
 
-shared_ptr<AbstractBlock> OBlock::createHint() const {
-	shared_ptr<AbstractBlock> block = make_shared<OBlock>(level, col, row, score);
+shared_ptr<AbstractBlock> OBlock::createHint() {
+	shared_ptr<AbstractBlock> block = make_shared<OBlock>(getLevel(), 
+										getCol(), getRow(), nullptr);
 	block->toggleHint();
 	return block;
 }

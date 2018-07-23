@@ -17,8 +17,9 @@ char JBlock::getShape() const {
 	}
 }
 
-shared_ptr<AbstractBlock> JBlock::createHint() const {
-	shared_ptr<AbstractBlock> block = make_shared<JBlock>(level, col, row, score);
+shared_ptr<AbstractBlock> JBlock::createHint() {
+	shared_ptr<AbstractBlock> block = make_shared<JBlock>(getLevel(), 
+										getCol(), getRow(), nullptr);
 	block->toggleHint();
 	return block;
 }

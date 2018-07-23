@@ -48,7 +48,7 @@ void Grid::shiftRowsDown(int startRow){
   }
 }
 
-void clearHintBlock(){
+void Grid::clearHintBlock(){
   Coordinates c1 = hintBlock->get1stCell();
   Coordinates c2 = hintBlock->get2ndCell();
   Coordinates c3 = hintBlock->get3rdCell();
@@ -200,10 +200,10 @@ void Grid::hint(std::shared_ptr<AbstractBlock> block){
 
   this->hintBlock = hintBlock; // set grid hintBlock to best hintBlock
 
-  c1 = hintBlock->get1stCell(); // get hintBlock's coordinates
-  c2 = hintBlock->get2ndCell();
-  c3 = hintBlock->get3rdCell();
-  c4 = hintBlock->get4thCell();
+  Coordinates c1 = hintBlock->get1stCell(); // get hintBlock's coordinates
+  Coordinates c2 = hintBlock->get2ndCell();
+  Coordinates c3 = hintBlock->get3rdCell();
+  Coordinates c4 = hintBlock->get4thCell();
 
   theGrid[c1.row][c1.col].setBlock(hintBlock); // place hintBlock on grid
   theGrid[c2.row][c2.col].setBlock(hintBlock);
@@ -454,7 +454,7 @@ bool Grid::newBlock(std::shared_ptr<AbstractBlock> block){
     theGrid[c3.row][c3.col].setBlock(block);
     theGrid[c4.row][c4.col].setBlock(block);
     
-    if(block->getlevel() == 4){
+    if(block->getLevel() == 4){
       blocksSinceClear++;
     }
     return true;

@@ -17,8 +17,9 @@ char TBlock::getShape() const {
 	}
 }
 
-shared_ptr<AbstractBlock> TBlock::createHint() const {
-	shared_ptr<AbstractBlock> block = make_shared<TBlock>(level, col, row, score);
+shared_ptr<AbstractBlock> TBlock::createHint() {
+	shared_ptr<AbstractBlock> block = make_shared<TBlock>(getLevel(), 
+										getCol(), getRow(), nullptr);
 	block->toggleHint();
 	return block;
 }

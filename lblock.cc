@@ -17,8 +17,9 @@ char LBlock::getShape() const {
 	}
 }
 
-shared_ptr<AbstractBlock> LBlock::createHint() const {
-	shared_ptr<AbstractBlock> block = make_shared<LBlock>(level, col, row, score);
+shared_ptr<AbstractBlock> LBlock::createHint() {
+	shared_ptr<AbstractBlock> block = make_shared<LBlock>(getLevel(), 
+										getCol(), getRow(), nullptr);
 	block->toggleHint();
 	return block;
 }
