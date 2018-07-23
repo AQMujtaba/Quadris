@@ -95,7 +95,7 @@ void Grid::hint(std::shared_ptr<AbstractBlock> block){
 
   for (int orientation = 0; orientation <= 3; ++orientation) {
     shared_ptr<AbstractBlock> tempHintBlock = block->createHint();
-    tempHintBlock->setOrientation(getOrientation() + orientation);
+    tempHintBlock->setOrientation(tempHintBlock->getOrientation() + orientation);
     int leftBarrier = currCol; // starting point before searching left side
     int rightBarrier = currCol; // starting point before searching right side
 
