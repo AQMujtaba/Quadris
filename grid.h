@@ -31,6 +31,7 @@ class Grid{
   Grid(bool textOnly, int currentLevel, std::shared_ptr<ScoreKeeper> scoreKeeper);
   void hint(std::shared_ptr<AbstractBlock> block);
   void reset();
+  void updateNextBlock(char type);
   void left(std::shared_ptr<AbstractBlock> block, int multiplicity);
   void right(std::shared_ptr<AbstractBlock> block, int multiplicity);
   void down(std::shared_ptr<AbstractBlock> block, int multiplicity);

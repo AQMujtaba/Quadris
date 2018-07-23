@@ -16,6 +16,7 @@ class Quadris {
   std::unique_ptr<CommandInterpreter> myInterpreter;
   std::shared_ptr<ScoreKeeper> scoreKeeper;
   std::shared_ptr<AbstractBlock> currentBlock;
+  std::shared_ptr<AbstractBlock> nextBlock;
   std::shared_ptr<AbstractLevel> currentLevel;
   void setLevel(int level);
  public:

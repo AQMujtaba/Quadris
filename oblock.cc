@@ -76,7 +76,7 @@ Coordinates OBlock::get3rdCell(int newOrientation) {
 													 // newOrientation % 4
 
 	if (newOrientation == 3) {
-		Coordinates cell{ col, row + 1 };
+		Coordinates cell{ col, row - 1 };
 		return cell;
 	} else if (newOrientation == 2) {
 		Coordinates cell{ col, row };
@@ -85,7 +85,7 @@ Coordinates OBlock::get3rdCell(int newOrientation) {
 		Coordinates cell{ col + 1, row };
 		return cell;
 	} else {
-		Coordinates cell{ col + 1, row + 1 }; 
+		Coordinates cell{ col + 1, row - 1 };
 		return cell;
 	}
 }
