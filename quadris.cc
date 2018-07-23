@@ -160,10 +160,6 @@ void Quadris::Start(){
       theGrid->hint(currentBlock);
     }
     else if(aCommand == "noCommand"){
-      cerr << "INVALID COMMAND" << endl;
-    }
-    if(gameOver){
-      cout << "Game Over. Enter restart to play again." << endl;
     }
     cout << *theGrid;
   }
