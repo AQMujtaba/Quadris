@@ -25,6 +25,7 @@ class Grid{
   void checkRows();
   void clearRow(int row);
   void shiftRowsDown(int startRow);
+  void clearHintBlock();
   void dropSingleBlock();
  public:
   Grid(bool textOnly, int currentLevel, std::shared_ptr<ScoreKeeper> scoreKeeper);

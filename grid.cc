@@ -48,6 +48,19 @@ void Grid::shiftRowsDown(int startRow){
   }
 }
 
+void clearHintBlock(){
+  Coordinates c1 = hintBlock->get1stCell();
+  Coordinates c2 = hintBlock->get2ndCell();
+  Coordinates c3 = hintBlock->get3rdCell();
+  Coordinates c4 = hintBlock->get4thCell();
+  theGrid[c1.row][c1.col].clearCell(false);
+  theGrid[c2.row][c2.col].clearCell(false);
+  theGrid[c3.row][c3.col].clearCell(false);
+  theGrid[c4.row][c4.col].clearCell(false);
+  hintBlock = nullptr;
+}
+
+
 void Grid::dropSingleBlock(){
   shared_ptr<SingleBlock> newBlock;
   newBlock = make_shared<SingleBlock>(0,0,0, scoreKeeper);
@@ -175,15 +188,7 @@ void Grid::reset(){
 
 void Grid::left(std::shared_ptr<AbstractBlock> block, int multiplicity){
   if (hintBlock) {
-    Coordinates c1 = hintBlock->get1stCell();
-    Coordinates c2 = hintBlock->get2ndCell();
-    Coordinates c3 = hintBlock->get3rdCell();
-    Coordinates c4 = hintBlock->get4thCell();
-    theGrid[c1.row][c1.col].clearCell(false);
-    theGrid[c2.row][c2.col].clearCell(false);
-    theGrid[c3.row][c3.col].clearCell(false);
-    theGrid[c4.row][c4.col].clearCell(false);
-    hintBlock = nullptr;
+    clearHintBlock();
   }
   Coordinates c1 = block->get1stCell();
   Coordinates c2 = block->get2ndCell();
@@ -219,15 +224,7 @@ void Grid::left(std::shared_ptr<AbstractBlock> block, int multiplicity){
 
 void Grid::right(std::shared_ptr<AbstractBlock> block, int multiplicity){
   if (hintBlock) {
-    Coordinates c1 = hintBlock->get1stCell();
-    Coordinates c2 = hintBlock->get2ndCell();
-    Coordinates c3 = hintBlock->get3rdCell();
-    Coordinates c4 = hintBlock->get4thCell();
-    theGrid[c1.row][c1.col].clearCell(false);
-    theGrid[c2.row][c2.col].clearCell(false);
-    theGrid[c3.row][c3.col].clearCell(false);
-    theGrid[c4.row][c4.col].clearCell(false);
-    hintBlock = nullptr;
+    clearHintBlock();
   }
   Coordinates c1 = block->get1stCell();
   Coordinates c2 = block->get2ndCell();
@@ -263,15 +260,7 @@ void Grid::right(std::shared_ptr<AbstractBlock> block, int multiplicity){
 
 void Grid::down(std::shared_ptr<AbstractBlock> block, int multiplicity){
   if (hintBlock) {
-    Coordinates c1 = hintBlock->get1stCell();
-    Coordinates c2 = hintBlock->get2ndCell();
-    Coordinates c3 = hintBlock->get3rdCell();
-    Coordinates c4 = hintBlock->get4thCell();
-    theGrid[c1.row][c1.col].clearCell(false);
-    theGrid[c2.row][c2.col].clearCell(false);
-    theGrid[c3.row][c3.col].clearCell(false);
-    theGrid[c4.row][c4.col].clearCell(false);
-    hintBlock = nullptr;
+    clearHintBlock();
   }
   Coordinates c1 = block->get1stCell();
   Coordinates c2 = block->get2ndCell();
@@ -303,15 +292,7 @@ void Grid::down(std::shared_ptr<AbstractBlock> block, int multiplicity){
 
 void Grid::drop(std::shared_ptr<AbstractBlock> block){
   if (hintBlock) {
-    Coordinates c1 = hintBlock->get1stCell();
-    Coordinates c2 = hintBlock->get2ndCell();
-    Coordinates c3 = hintBlock->get3rdCell();
-    Coordinates c4 = hintBlock->get4thCell();
-    theGrid[c1.row][c1.col].clearCell(false);
-    theGrid[c2.row][c2.col].clearCell(false);
-    theGrid[c3.row][c3.col].clearCell(false);
-    theGrid[c4.row][c4.col].clearCell(false);
-    hintBlock = nullptr;
+    clearHintBlock();
   }
   Coordinates c1 = block->get1stCell();
   Coordinates c2 = block->get2ndCell();
@@ -342,15 +323,7 @@ void Grid::drop(std::shared_ptr<AbstractBlock> block){
 
 void Grid::clockwise(std::shared_ptr<AbstractBlock> block, int multiplicity){
   if (hintBlock) {
-    Coordinates c1 = hintBlock->get1stCell();
-    Coordinates c2 = hintBlock->get2ndCell();
-    Coordinates c3 = hintBlock->get3rdCell();
-    Coordinates c4 = hintBlock->get4thCell();
-    theGrid[c1.row][c1.col].clearCell(false);
-    theGrid[c2.row][c2.col].clearCell(false);
-    theGrid[c3.row][c3.col].clearCell(false);
-    theGrid[c4.row][c4.col].clearCell(false);
-    hintBlock = nullptr;
+    clearHintBlock();
   }
   for(int i = 0; i < multiplicity; i++){
     Coordinates c1 = block->get1stCell();
@@ -384,15 +357,7 @@ void Grid::clockwise(std::shared_ptr<AbstractBlock> block, int multiplicity){
 
 void Grid::counterClockwise(std::shared_ptr<AbstractBlock> block, int multiplicity){
   if (hintBlock) {
-    Coordinates c1 = hintBlock->get1stCell();
-    Coordinates c2 = hintBlock->get2ndCell();
-    Coordinates c3 = hintBlock->get3rdCell();
-    Coordinates c4 = hintBlock->get4thCell();
-    theGrid[c1.row][c1.col].clearCell(false);
-    theGrid[c2.row][c2.col].clearCell(false);
-    theGrid[c3.row][c3.col].clearCell(false);
-    theGrid[c4.row][c4.col].clearCell(false);
-    hintBlock = nullptr;
+    clearHintBlock();
   }
   for(int i = 0; i < multiplicity; i++){
     Coordinates c1 = block->get1stCell();
