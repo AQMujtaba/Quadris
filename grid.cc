@@ -495,6 +495,10 @@ void Grid::setLevel(int newLevel){
 
 void Grid::replaceBlock(std::shared_ptr<AbstractBlock> currBlock,
                         std::shared_ptr<AbstractBlock> newBlock){
+  if (hintBlock) { // clear hint block if it exists
+    clearHintBlock();
+  }
+
   newBlock->setRow(currBlock->getRow());
   newBlock->setCol(currBlock->getCol());
   
