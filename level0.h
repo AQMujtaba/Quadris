@@ -11,7 +11,7 @@ class Level0: public AbstractLevel {
  public:
   Level0(std::string seqFile, int seed);
   void setRandom(bool r) override;
-  int getLevel() override;
+  int getLevel() const override;
   std::shared_ptr<AbstractBlock> createBlock() override;
 };
 

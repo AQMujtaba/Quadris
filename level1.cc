@@ -18,7 +18,7 @@ void Level1::setRandom(bool r){
   random = r;
 }
 
-int Level1::getLevel(){
+int Level1::getLevel() const{
   return 1;
 }
 
