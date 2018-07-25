@@ -94,7 +94,7 @@ void Grid::hint(std::shared_ptr<AbstractBlock> block) {
   shared_ptr<AbstractBlock> hintBlock = block->createHint();
   int currRow = block->getRow();
   int currCol = block->getCol();
-  int height = 0; // starting height on grid
+  int lowest = 0; // starting height on grid
 
   Coordinates ogC1 = block->get1stCell(); // get coordinates of og block
   Coordinates ogC2 = block->get2ndCell();
@@ -132,7 +132,8 @@ void Grid::hint(std::shared_ptr<AbstractBlock> block) {
             && theGrid[c3.row][c3.col - 1].canAddBlock(tempHintBlock)
             && theGrid[c4.row][c4.col - 1].canAddBlock(tempHintBlock)) {
 
-          tempHintBlock->setCol(tempHintBlock->getCol() - 1);          
+          tempHintBlock->setCol(tempHintBlock->getCol() - 1);
+          int drop = 0; // counter for how low to possibly go           
 
           // how far down on left side
           while(c1.row < gridHeight - 1 && c2.row < gridHeight - 1
@@ -146,27 +147,27 @@ void Grid::hint(std::shared_ptr<AbstractBlock> block) {
             c2 = tempHintBlock->get2ndCell();
             c3 = tempHintBlock->get3rdCell();
             c4 = tempHintBlock->get4thCell();
+            ++drop;
           }
 
-          //check how low it went
-          int tempHeight = tempHintBlock->getRow() - tempHintBlock->getHeight();
-          // save changes if needed
-          if (height < tempHeight) {
-            height = tempHeight;
+          // check how low it went and save changes if needed
+          if (lowest < drop) {
+            lowest = drop;
             hintBlock->setCol(tempHintBlock->getCol());
             hintBlock->setRow(tempHintBlock->getRow());
             hintBlock->setOrientation(tempHintBlock->getOrientation());
           }
 
           tempHintBlock->setRow(currRow);
+
           c1 = tempHintBlock->get1stCell();
           c2 = tempHintBlock->get2ndCell();
           c3 = tempHintBlock->get3rdCell();
           c4 = tempHintBlock->get4thCell();
         }
 
-        tempHintBlock->setCol(currCol); // reset 
-        tempHintBlock->setRow(currRow); // starting point
+        tempHintBlock->setCol(currCol - 1); // reset starting
+        tempHintBlock->setRow(currRow);     // to include current column
 
         while(c1.col < 10 && c2.col < 10 // how far right without obstruction
             && c3.col < 10 && c4.col < 10
@@ -175,7 +176,8 @@ void Grid::hint(std::shared_ptr<AbstractBlock> block) {
             && theGrid[c3.row][c3.col + 1].canAddBlock(tempHintBlock)
             && theGrid[c4.row][c4.col + 1].canAddBlock(tempHintBlock)) {
 
-          tempHintBlock->setCol(tempHintBlock->getCol() + 1);          
+          tempHintBlock->setCol(tempHintBlock->getCol() + 1);
+          int drop = 0; // counter for how low to possibly go          
 
           // how far down on right side
           while(c1.row < gridHeight - 1 && c2.row < gridHeight - 1
@@ -189,19 +191,19 @@ void Grid::hint(std::shared_ptr<AbstractBlock> block) {
             c2 = tempHintBlock->get2ndCell();
             c3 = tempHintBlock->get3rdCell();
             c4 = tempHintBlock->get4thCell();
+            ++drop;
           }
 
-          //check how low it went
-          int tempHeight = tempHintBlock->getRow() - tempHintBlock->getHeight();
-          // save changes if needed
-          if (height < tempHeight) {
-            height = tempHeight;
+          // check how low it went and save changes if needed
+          if (lowest < drop) {
+            lowest = drop;
             hintBlock->setCol(tempHintBlock->getCol());
             hintBlock->setRow(tempHintBlock->getRow());
             hintBlock->setOrientation(tempHintBlock->getOrientation());
           }
 
           tempHintBlock->setRow(currRow);
+          
           c1 = tempHintBlock->get1stCell();
           c2 = tempHintBlock->get2ndCell();
           c3 = tempHintBlock->get3rdCell();
