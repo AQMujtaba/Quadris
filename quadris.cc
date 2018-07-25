@@ -148,6 +148,7 @@ void Quadris::Start(){
       setLevel(currentLevel->getLevel());
       scoreKeeper->resetScore();
       theGrid->reset();
+      currentBlock->togglePlaced();
       currentBlock = currentLevel->createBlock();
       nextBlock->togglePlaced();
       nextBlock = currentLevel->createBlock();
