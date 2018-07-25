@@ -65,7 +65,7 @@ void Grid::dropSingleBlock(){
   shared_ptr<SingleBlock> newBlock;
   newBlock = make_shared<SingleBlock>(0,0,0, scoreKeeper);
   newBlock->togglePlaced();
-  int rowIndex = gridHeight-1;
+  int rowIndex = gridHeight - 1;
   while(rowIndex >= 0 && !theGrid[rowIndex][5].canAddBlock(newBlock)){
     rowIndex--;
   }
@@ -241,7 +241,9 @@ void Grid::reset(){
 
 void Grid::updateNextBlock(char type){
   td->updateNextBlock(type);
-  gd->updateNextBlock(type);
+  if (!textOnly) {
+    gd->updateNextBlock(type);
+  }
 }
 
 void Grid::left(std::shared_ptr<AbstractBlock> block, int multiplicity){
