@@ -30,7 +30,6 @@ class AbstractBlock{
   void setCol(int newCol);
   void setScoreKeeper(std::shared_ptr<ScoreKeeper> newScore);
   bool isHeavy() const; // true for levels 3+
-  int getHeight();
   Coordinates getReference() const;
   virtual char getShape() const = 0;
   virtual std::shared_ptr<AbstractBlock> createHint() = 0; // create a hint block
